@@ -3,24 +3,21 @@ package org.example.service;
 import org.example.domain.abstraction.Animal;
 import org.example.factory.AnimalSimpleFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public interface CreateAnimalService {
-
-    default List<Animal> createRandomAnimals() {
+    /**Creates an array of size 10 of randomly generated animals with use of AnimalSimpleFactory */
+    default Animal[] createRandomAnimals() {
         int maxCount = 10;
-        List<Animal> animals = new ArrayList<>(maxCount);
+        Animal[] animals = new Animal[maxCount];
 
         System.out.println("It's default method in interface CreateAnimalService");
 
         int count = 0;
         Animal animal;
-        while (count++ != maxCount) {
+        while (count != maxCount) {
             animal = AnimalSimpleFactory.createRandomAnimal();
             System.out.println(animal);
 
-            animals.add(animal);
+            animals[count++] = animal;
         }
 
         return animals;

@@ -3,11 +3,13 @@ package org.example.domain;
 import org.example.domain.abstraction.Predator;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class Tiger extends Predator {
 
-    public Tiger(String breed, String name, BigDecimal cost, String character) {
-        super(breed, name, cost, character);
+    /** Creates a new object of class Tiger */
+    public Tiger(String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
+        super(breed, name, cost, character, birthDate);
     }
 
 }
