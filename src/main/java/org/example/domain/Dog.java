@@ -7,7 +7,9 @@ import java.time.LocalDate;
 
 public class Dog extends Pet {
 
-    /** Creates a new object of class Dog */
+    /**
+     * Creates a new object of class Dog
+     */
     public Dog(String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
         super(breed, name, cost, character, birthDate);
     }

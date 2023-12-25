@@ -7,7 +7,9 @@ import java.time.LocalDate;
 
 public class Tiger extends Predator {
 
-    /** Creates a new object of class Tiger */
+    /**
+     * Creates a new object of class Tiger
+     */
     public Tiger(String breed, String name, BigDecimal cost, String character, LocalDate birthDate) {
         super(breed, name, cost, character, birthDate);
     }

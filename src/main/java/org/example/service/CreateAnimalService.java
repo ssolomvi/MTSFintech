@@ -1,10 +1,13 @@
 package org.example.service;
 
 import org.example.domain.abstraction.Animal;
-import org.example.factory.AnimalSimpleFactory;
+import org.example.factory.animal.AnimalSimpleFactory;
 
 public interface CreateAnimalService {
-    /**Creates an array of size 10 of randomly generated animals with use of AnimalSimpleFactory */
+
+    /**
+     * Creates an array of size 10 of randomly generated animals with use of AnimalSimpleFactory
+     */
     default Animal[] createRandomAnimals() {
         int maxCount = 10;
         Animal[] animals = new Animal[maxCount];

@@ -3,10 +3,10 @@ package org.example.domain.abstraction;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public abstract class AbstractAnimal implements Animal {
+
     protected LocalDate birthDate;
     protected String breed;
     protected String name;
@@ -26,7 +26,7 @@ public abstract class AbstractAnimal implements Animal {
         return getClass().getSimpleName() +
                 ":{breed=" + getBreed() + ";name=" + getName() +
                 ";cost=" + (Objects.isNull(getCost()) ? "null" : getCost().toPlainString()) + ";character=" + getCharacter() +
-                ";birthDate=" + birthDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ";}";
+                ";birthDate=" + String.format("%1$td-%1$tm-%1$tY", getBirthDate()) + ";}";
     }
 
     @Override
@@ -66,12 +66,12 @@ public abstract class AbstractAnimal implements Animal {
         return Objects.equals(birthDate, that.birthDate)
                 && Objects.equals(breed, that.breed)
                 && Objects.equals(name, that.name)
-                && Objects.equals(cost, that.cost)
                 && Objects.equals(character, that.character);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(birthDate, breed, name, cost, character);
+        return Objects.hash(birthDate, breed, name, character);
     }
+
 }

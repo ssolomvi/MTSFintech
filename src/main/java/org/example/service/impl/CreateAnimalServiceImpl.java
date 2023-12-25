@@ -1,11 +1,24 @@
 package org.example.service.impl;
 
 import org.example.domain.abstraction.Animal;
-import org.example.factory.AnimalSimpleFactory;
+import org.example.factory.animal.AnimalFactory;
 import org.example.service.CreateAnimalService;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
-    /**Creates an array of size 10 of randomly generated animals with use of AnimalSimpleFactory */
+
+    private final AnimalFactory animalFactory;
+
+    public CreateAnimalServiceImpl(AnimalFactory animalFactory) {
+        if (animalFactory == null) {
+            throw new IllegalArgumentException("'animalFactory' is null");
+        }
+
+        this.animalFactory = animalFactory;
+    }
+
+    /**
+     * Creates an array of size 10 of randomly generated animals with use of AnimalSimpleFactory
+     */
     @Override
     public Animal[] createRandomAnimals() {
         int maxCount = 10;
@@ -16,7 +29,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         int count = 0;
         Animal animal;
         do {
-            animal = AnimalSimpleFactory.createRandomAnimal();
+            animal = animalFactory.createRandomAnimal();
             System.out.println(animal);
 
             animals[count++] = animal;
@@ -26,14 +39,16 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         return animals;
     }
 
-    /**Creates an array of size n of randomly generated animals with use of AnimalSimpleFactory */
+    /**
+     * Creates an array of size n of randomly generated animals with use of AnimalSimpleFactory
+     */
     public Animal[] createRandomAnimals(int n) {
         Animal[] animals = new Animal[n];
         System.out.println("It's overload method in class CreateAnimalServiceImpl");
 
         Animal animal;
         for (int i = 0; i < n; i++) {
-            animal = AnimalSimpleFactory.createRandomAnimal();
+            animal = animalFactory.createRandomAnimal();
             System.out.println(animal);
 
             animals[i] = animal;
