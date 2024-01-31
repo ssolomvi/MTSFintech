@@ -53,7 +53,12 @@ public class SearchServiceImpl implements SearchService {
         var now = LocalDate.now();
 
         for (Animal animal : animals) {
-            if (Period.between(animal.getBirthDate(), now).getYears() > n) {
+            Period betweenNowAndBirthdate = Period.between(animal.getBirthDate(), now);
+            int yearsBetweenNowAndAnimalsBirthdate = betweenNowAndBirthdate.getYears();
+            if (yearsBetweenNowAndAnimalsBirthdate > n) {
+                animalsOlderN.add(animal);
+            } else if (yearsBetweenNowAndAnimalsBirthdate == n
+                    && (betweenNowAndBirthdate.getDays() != 0 || betweenNowAndBirthdate.getMonths() != 0)) {
                 animalsOlderN.add(animal);
             }
         }
@@ -61,27 +66,35 @@ public class SearchServiceImpl implements SearchService {
         return animalsOlderN.toArray(new Animal[0]);
     }
 
+    private void printDuplicate(List<Animal> duplicates) {
+        for (Animal duplicate : duplicates) {
+            System.out.println(duplicate);
+        }
+    }
+
     /**
      * Find duplicate animals and prints them in {@code System.out}
      *
      * @param animals An input array of animals
+     * @return Found duplicates
      */
     @Override
-    public void findDuplicate(Animal[] animals) {
+    public Animal[] findDuplicate(Animal[] animals) {
         if (animals == null) {
             throw new IllegalArgumentException("Argument Animal[] animals must not be null!");
         }
 
-        //не для "уникальности", а для скорости поиска
+        List<Animal> duplicates = new ArrayList<>();
+        // not for "uniqueness", but for search speed
         Set<Animal> animalsUnique = new HashSet<>();
         for (Animal animal : animals) {
             if (animalsUnique.contains(animal)) {
-                System.out.println(animal);
+                duplicates.add(animal);
             } else {
                 animalsUnique.add(animal);
             }
         }
-
+        printDuplicate(duplicates);
+        return duplicates.toArray(new Animal[0]);
     }
-
 }

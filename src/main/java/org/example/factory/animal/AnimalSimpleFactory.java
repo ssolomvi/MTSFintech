@@ -22,7 +22,7 @@ public final class AnimalSimpleFactory {
     private AnimalSimpleFactory() {
     }
 
-    //Публичный статический метод почти всегда лучше, чем использование конструктора в коде приложения
+    // public static method is almost always better than using constructor in app's code
     public static Animal createRandomAnimal() {
         int randCoefficient = ThreadLocalRandom.current().nextInt(0, 3);
         var type = AnimalType.values()[randCoefficient];

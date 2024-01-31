@@ -73,5 +73,4 @@ public abstract class AbstractAnimal implements Animal {
     public int hashCode() {
         return Objects.hash(birthDate, breed, name, character);
     }
-
 }

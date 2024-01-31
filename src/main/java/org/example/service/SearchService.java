@@ -8,6 +8,6 @@ public interface SearchService {
 
     Animal[] findOlderAnimal(Animal[] animals, int n);
 
-    void findDuplicate(Animal[] animals);
+    Animal[] findDuplicate(Animal[] animals);
 
 }
