@@ -17,6 +17,7 @@ import org.mockito.quality.Strictness;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 import static java.math.RoundingMode.HALF_EVEN;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -34,9 +35,9 @@ public class AnimalsTest {
                     "Happy", LocalDate.of(2002, 11, 13));
             Animal shark = new Shark("shark", "Chris", BigDecimal.valueOf(1778000).setScale(2, HALF_EVEN),
                     "Angry", LocalDate.of(2023, 12, 1));
-            assertEquals(true, tiger
-                    .equals(/*Shallow copy*/new Tiger(tiger.getBreed(), tiger.getName(), tiger.getCost(), tiger.getCharacter(), tiger.getBirthDate())));
-            assertEquals(false, tiger.equals(shark));
+            assertEquals(true, Objects.equals(tiger,
+                    /*Shallow copy*/new Tiger(tiger.getBreed(), tiger.getName(), tiger.getCost(), tiger.getCharacter(), tiger.getBirthDate())));
+            assertEquals(false, Objects.equals(tiger, shark));
         }
     }
 

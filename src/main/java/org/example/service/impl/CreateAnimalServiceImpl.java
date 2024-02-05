@@ -1,13 +1,25 @@
 package org.example.service.impl;
 
 import org.example.domain.abstraction.Animal;
+import org.example.domain.enums.AnimalType;
 import org.example.factory.animal.AnimalFactory;
 import org.example.service.CreateAnimalService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
-
     private final AnimalFactory animalFactory;
+    private AnimalType animalType;
 
+    @Override
+    public void setType() {
+        animalType = AnimalType.TIGER;
+    }
+
+    public Animal createAnimal() {
+        return animalFactory.createRandomAnimal(animalType);
+    }
+
+    @Autowired
     public CreateAnimalServiceImpl(AnimalFactory animalFactory) {
         if (animalFactory == null) {
             throw new IllegalArgumentException("'animalFactory' is null");

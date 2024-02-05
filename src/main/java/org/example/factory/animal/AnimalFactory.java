@@ -14,4 +14,5 @@ public interface AnimalFactory extends Factory {
     Animal createAnimal(AnimalType type, String breed, String name,
                         BigDecimal cost, String character, LocalDate birthDate);
 
+    Animal createRandomAnimal(AnimalType type);
 }
