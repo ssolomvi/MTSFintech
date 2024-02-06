@@ -1,15 +1,15 @@
 package org.example.service;
 
 import org.example.domain.abstraction.Animal;
-import org.example.domain.enums.AnimalType;
 import org.example.factory.animal.AnimalSimpleFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 public interface CreateAnimalService {
-    void setType();
+
+    String NAME = "example_CreateAnimalService";
+
+    void initAnimalType();
+
+    Animal createAnimal();
 
     /**
      * Creates an array of size 10 of randomly generated animals with use of AnimalSimpleFactory

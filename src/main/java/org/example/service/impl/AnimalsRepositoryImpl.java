@@ -2,18 +2,45 @@ package org.example.service.impl;
 
 import org.example.domain.abstraction.Animal;
 import org.example.service.AnimalsRepository;
-import org.springframework.stereotype.Repository;
+import org.example.service.CreateAnimalService;
+import org.springframework.beans.factory.ObjectProvider;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-@Repository
 public class AnimalsRepositoryImpl implements AnimalsRepository {
-    private List<Animal> animals;
+
+    private final ObjectProvider<CreateAnimalService> createAnimalServicesBeanProvider;
+
+    private final Animal[] animals;
+
+    private boolean initialized;
+
+    {
+        animals = new Animal[(Integer.MAX_VALUE / 100_000)];
+    }
+
+    public AnimalsRepositoryImpl(ObjectProvider<CreateAnimalService> createAnimalServicesBeanProvider) {
+        this.createAnimalServicesBeanProvider = createAnimalServicesBeanProvider;
+    }
+
+    public void postConstruct() {
+        if (!initialized) {
+            CreateAnimalService prototype;
+            for (int i = 0; i < animals.length; i++) {
+                prototype = createAnimalServicesBeanProvider.getIfAvailable();
+                if (Objects.isNull(prototype)) {
+                    throw new RuntimeException("Caramba! 'prototype' is null");
+                }
+
+                animals[i] = prototype.createAnimal();
+            }
+
+            initialized = true;
+        }
+
+    }
 
     /**
      * Finds animals which were born is leap year and returns an array of their names
@@ -22,15 +49,15 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      */
     @Override
     public String[] findLeapYearNames() {
-        if (animals == null) {
-            throw new IllegalArgumentException("Argument Animal[] animals must not be null!");
-        }
-
         List<String> names = new ArrayList<>();
         for (Animal animal : animals) {
-            LocalDate birthdate = animal.getBirthDate();
-            if (birthdate.isLeapYear()) {
-                names.add(animal.getName());
+            if (Objects.nonNull(animal)) {
+                LocalDate birthdate = animal.getBirthDate();
+                if (Objects.nonNull(birthdate)
+                        && birthdate.isLeapYear()) {
+
+                    names.add(animal.getName());
+                }
             }
         }
 
@@ -41,36 +68,34 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     /**
      * Finds animals older than argument n
      *
-     * @param n       Represent years count
+     * @param n Represent years count
      * @return Array of animals which are older than argument n
      */
     @Override
     public Animal[] findOlderAnimal(int n) {
-        if (animals == null) {
-            throw new IllegalArgumentException("Argument Animal[] animals must not be null!");
-        }
-
         List<Animal> animalsOlderN = new ArrayList<>();
         var now = LocalDate.now();
 
         for (Animal animal : animals) {
-            Period betweenNowAndBirthdate = Period.between(animal.getBirthDate(), now);
-            int yearsBetweenNowAndAnimalsBirthdate = betweenNowAndBirthdate.getYears();
-            if (yearsBetweenNowAndAnimalsBirthdate > n) {
-                animalsOlderN.add(animal);
-            } else if (yearsBetweenNowAndAnimalsBirthdate == n
-                    && (betweenNowAndBirthdate.getDays() != 0 || betweenNowAndBirthdate.getMonths() != 0)) {
-                animalsOlderN.add(animal);
+            if (Objects.nonNull(animal)) {
+                var birthDate = animal.getBirthDate();
+                if (Objects.nonNull(birthDate)) {
+                    Period betweenNowAndBirthdate = Period.between(birthDate, now);
+                    int yearsBetweenNowAndAnimalsBirthdate = betweenNowAndBirthdate.getYears();
+                    if (yearsBetweenNowAndAnimalsBirthdate > n) {
+                        animalsOlderN.add(animal);
+
+                    } else if (yearsBetweenNowAndAnimalsBirthdate == n
+                            && (betweenNowAndBirthdate.getDays() != 0 || betweenNowAndBirthdate.getMonths() != 0)) {
+                        animalsOlderN.add(animal);
+                    }
+
+                }
             }
+
         }
 
         return animalsOlderN.toArray(new Animal[0]);
-    }
-
-    private void printDuplicate(List<Animal> duplicates) {
-        for (Animal duplicate : duplicates) {
-            System.out.println(duplicate);
-        }
     }
 
     /**
@@ -79,22 +104,34 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * @return Found duplicates
      */
     @Override
-    public Animal[] findDuplicate() {
-        if (animals == null) {
-            throw new IllegalArgumentException("Argument Animal[] animals must not be null!");
-        }
-
-        List<Animal> duplicates = new ArrayList<>();
+    public Set<Animal> findDuplicate() {
+        Set<Animal> duplicates = new LinkedHashSet<>();
         // not for "uniqueness", but for search speed
         Set<Animal> animalsUnique = new HashSet<>();
         for (Animal animal : animals) {
-            if (animalsUnique.contains(animal)) {
-                duplicates.add(animal);
-            } else {
-                animalsUnique.add(animal);
+            if (Objects.nonNull(animal)) {
+                if (animalsUnique.contains(animal)) {
+                    duplicates.add(animal);
+                } else {
+                    animalsUnique.add(animal);
+                }
             }
         }
-        printDuplicate(duplicates);
-        return duplicates.toArray(new Animal[0]);
+
+        return duplicates;
     }
+
+    @Override
+    public void printDuplicate() {
+        Set<Animal> duplicates = findDuplicate();
+        if (Objects.nonNull(duplicates)
+                && !duplicates.isEmpty()) {
+
+            for (Animal duplicate : duplicates) {
+                System.out.println(duplicate);
+            }
+        }
+
+    }
+
 }

@@ -6,17 +6,17 @@ import org.example.factory.animal.AnimalFactory;
 import org.example.service.CreateAnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class CreateAnimalServiceImpl implements CreateAnimalService {
+
     private final AnimalFactory animalFactory;
     private AnimalType animalType;
 
     @Override
-    public void setType() {
-        animalType = AnimalType.TIGER;
-    }
-
-    public Animal createAnimal() {
-        return animalFactory.createRandomAnimal(animalType);
+    public void initAnimalType() {
+        int randCoefficient = ThreadLocalRandom.current().nextInt(0, 3);
+        animalType = AnimalType.values()[randCoefficient];
     }
 
     @Autowired
@@ -26,6 +26,11 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         }
 
         this.animalFactory = animalFactory;
+    }
+
+    @Override
+    public Animal createAnimal() {
+        return animalFactory.createRandomAnimal(animalType);
     }
 
     /**

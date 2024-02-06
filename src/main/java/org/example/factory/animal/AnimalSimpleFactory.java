@@ -28,6 +28,17 @@ public final class AnimalSimpleFactory {
         var type = AnimalType.values()[randCoefficient];
         ++randCoefficient;
 
+        return createAnimal(type);
+    }
+
+    public static Animal createAnimal(AnimalType type) {
+        if (type == null) {
+            throw new IllegalArgumentException("'type' is null");
+        }
+
+        int randCoefficient = ThreadLocalRandom.current()
+                .nextInt(0, 100_000);
+
         switch (type) {
             case SHARK:
                 return createRandomShark(randCoefficient);

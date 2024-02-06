@@ -2,10 +2,18 @@ package org.example.service;
 
 import org.example.domain.abstraction.Animal;
 
+import java.util.Set;
+
 public interface AnimalsRepository {
+
+    String NAME = "example_AnimalsRepository";
+
     String[] findLeapYearNames();
 
     Animal[] findOlderAnimal(int n);
 
-    Animal[] findDuplicate();
+    Set<Animal> findDuplicate();
+
+    void printDuplicate();
+
 }
