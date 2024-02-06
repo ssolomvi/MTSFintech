@@ -1,6 +1,7 @@
 package org.example.service.impl;
 
 import org.example.domain.abstraction.Animal;
+import org.example.domain.enums.AnimalType;
 import org.example.service.AnimalsRepository;
 import org.example.service.CreateAnimalService;
 import org.springframework.beans.factory.ObjectProvider;
@@ -8,18 +9,19 @@ import org.springframework.beans.factory.ObjectProvider;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class AnimalsRepositoryImpl implements AnimalsRepository {
 
     private final ObjectProvider<CreateAnimalService> createAnimalServicesBeanProvider;
 
-    private final Animal[] animals;
-
     private boolean initialized;
 
-    {
-        animals = new Animal[(Integer.MAX_VALUE / 100_000)];
-    }
+//    {
+//        animals = new Animal[(Integer.MAX_VALUE / 100_000)];
+//    }
+
+    private final Animal[] animals = new Animal[(Integer.MAX_VALUE / 100_000)];
 
     public AnimalsRepositoryImpl(ObjectProvider<CreateAnimalService> createAnimalServicesBeanProvider) {
         this.createAnimalServicesBeanProvider = createAnimalServicesBeanProvider;
@@ -27,14 +29,25 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
 
     public void postConstruct() {
         if (!initialized) {
-            CreateAnimalService prototype;
-            for (int i = 0; i < animals.length; i++) {
-                prototype = createAnimalServicesBeanProvider.getIfAvailable();
+            int countOfAnimalTypes = AnimalType.values().length;
+            List<CreateAnimalService> prototypes = new ArrayList<>(countOfAnimalTypes);
+            for (int i = 0; i < countOfAnimalTypes; i++) {
+//                prototypes.add(createAnimalServicesBeanProvider.getIfAvailable());
+//                if (Objects.isNull(prototypes.get(i))) {
+//                    throw new RuntimeException(String.format("Caramba! All hands on deck! 'prototype' at index {0} is null", i));
+//                }
+                // or better is (?)
+                CreateAnimalService prototype = createAnimalServicesBeanProvider.getIfAvailable();
                 if (Objects.isNull(prototype)) {
-                    throw new RuntimeException("Caramba! 'prototype' is null");
+                    throw new RuntimeException(String.format("Caramba! All hands on deck! 'prototype' at index {0} is null", i));
                 }
+                prototypes.add(prototype);
+            }
 
-                animals[i] = prototype.createAnimal();
+            int randInt;
+            for (int i = 0; i < animals.length; i++) {
+                randInt = ThreadLocalRandom.current().nextInt(0, 3);
+                animals[i] = prototypes.get(randInt).createAnimal();
             }
 
             initialized = true;
