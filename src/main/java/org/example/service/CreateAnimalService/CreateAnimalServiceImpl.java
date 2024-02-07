@@ -1,9 +1,8 @@
-package org.example.service.impl;
+package org.example.service.CreateAnimalService;
 
 import org.example.domain.abstraction.Animal;
 import org.example.domain.enums.AnimalType;
 import org.example.factory.animal.AnimalFactory;
-import org.example.service.CreateAnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
@@ -11,14 +10,9 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     private final AnimalFactory animalFactory;
     private AnimalType animalType;
 
-    private static int kostil = 0;
-
     @Override
     public void initAnimalType() {
-        animalType = AnimalType.values()[kostil++];
-        if (kostil == 4) {
-            kostil = 0;
-        }
+        animalType = CreateAnimalServiceCounter.currentCreateAnimalServiceAnimalType(this);
 //        int randCoefficient = ThreadLocalRandom.current().nextInt(0, 3);
 //        animalType = AnimalType.values()[randCoefficient];
     }

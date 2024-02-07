@@ -1,6 +1,6 @@
 package org.example.domain.app.bpp;
 
-import org.example.service.CreateAnimalService;
+import org.example.service.CreateAnimalService.CreateAnimalService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 

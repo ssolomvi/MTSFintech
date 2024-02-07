@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.service.CreateAnimalService;
 
 import org.example.domain.abstraction.Animal;
 import org.example.factory.animal.AnimalSimpleFactory;

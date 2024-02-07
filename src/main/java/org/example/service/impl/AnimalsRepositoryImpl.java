@@ -3,7 +3,7 @@ package org.example.service.impl;
 import org.example.domain.abstraction.Animal;
 import org.example.domain.enums.AnimalType;
 import org.example.service.AnimalsRepository;
-import org.example.service.CreateAnimalService;
+import org.example.service.CreateAnimalService.CreateAnimalService;
 import org.springframework.beans.factory.ObjectProvider;
 
 import java.time.LocalDate;
