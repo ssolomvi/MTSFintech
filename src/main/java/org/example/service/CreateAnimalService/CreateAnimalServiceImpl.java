@@ -10,11 +10,8 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     private final AnimalFactory animalFactory;
     private AnimalType animalType;
 
-    @Override
-    public void initAnimalType() {
-        animalType = CreateAnimalServiceCounter.currentCreateAnimalServiceAnimalType(this);
-//        int randCoefficient = ThreadLocalRandom.current().nextInt(0, 3);
-//        animalType = AnimalType.values()[randCoefficient];
+    public void setAnimalType(AnimalType animalType) {
+        this.animalType = animalType;
     }
 
     @Autowired

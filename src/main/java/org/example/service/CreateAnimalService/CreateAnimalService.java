@@ -1,13 +1,14 @@
 package org.example.service.CreateAnimalService;
 
 import org.example.domain.abstraction.Animal;
+import org.example.domain.enums.AnimalType;
 import org.example.factory.animal.AnimalSimpleFactory;
 
 public interface CreateAnimalService {
 
     String NAME = "example_CreateAnimalService";
 
-    void initAnimalType();
+    void setAnimalType(AnimalType animalType);
 
     Animal createAnimal();
 

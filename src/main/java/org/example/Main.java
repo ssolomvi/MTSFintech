@@ -1,11 +1,10 @@
 package org.example;
 
 import org.example.domain.app.config.AppConfig;
+import org.example.provider.CreateAnimalServiceCachedProvider;
 import org.example.service.AnimalsRepository;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan("org")
 public class Main {
 
     public static void main(String[] args) {
@@ -19,6 +18,9 @@ public class Main {
         animalsRepo.findOlderAnimal(10);
         animalsRepo.findDuplicate();
         animalsRepo.printDuplicate();
+
+        System.out.println(CreateAnimalServiceCachedProvider.getExistingAnimalType());
+        System.out.println(CreateAnimalServiceCachedProvider.getCachedValues());
 
         ctx.close();
     }

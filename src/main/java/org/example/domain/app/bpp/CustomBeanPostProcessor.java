@@ -1,5 +1,7 @@
 package org.example.domain.app.bpp;
 
+import org.example.domain.enums.AnimalType;
+import org.example.provider.AnimalTypeCounter;
 import org.example.service.CreateAnimalService.CreateAnimalService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -10,7 +12,11 @@ public class CustomBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(@SuppressWarnings("NullableProblems") Object bean,
                                                   @SuppressWarnings("NullableProblems") String beanName) throws BeansException {
         if (bean instanceof CreateAnimalService) {
-            ((CreateAnimalService) bean).initAnimalType();
+            AnimalType type = AnimalType.values()[(int) AnimalTypeCounter.getCount()];
+
+            ((CreateAnimalService) bean).setAnimalType(type);
+
+            AnimalTypeCounter.increment();
         }
 
         return bean;
