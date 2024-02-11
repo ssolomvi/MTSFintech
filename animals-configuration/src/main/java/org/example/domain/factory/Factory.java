@@ -1,4 +1,4 @@
-package org.example.factory;
+package org.example.domain.factory;
 
 import org.example.domain.abstraction.Instance;
 

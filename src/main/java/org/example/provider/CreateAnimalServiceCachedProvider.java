@@ -1,7 +1,7 @@
 package org.example.provider;
 
 import org.example.domain.enums.AnimalType;
-import org.example.service.CreateAnimalService.CreateAnimalService;
+import org.example.domain.service.CreateAnimalService.CreateAnimalService;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.util.ReflectionUtils;
 

@@ -1,8 +1,8 @@
-package org.example.service.CreateAnimalService;
+package org.example.domain.service.CreateAnimalService;
 
 import org.example.domain.abstraction.Animal;
 import org.example.domain.enums.AnimalType;
-import org.example.factory.animal.AnimalFactory;
+import org.example.domain.factory.animal.AnimalFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CreateAnimalServiceImpl implements CreateAnimalService {
@@ -32,7 +32,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
      * Creates an array of size 10 of randomly generated animals with use of AnimalSimpleFactory
      */
     @Override
-    public Animal[] createRandomAnimals() {
+    public Animal[] createRandomAnimals(@Autowired AnimalFactory animalFactory) {
         int maxCount = 10;
         Animal[] animals = new Animal[maxCount];
 

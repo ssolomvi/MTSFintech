@@ -4,7 +4,7 @@ import org.example.domain.abstraction.Animal;
 import org.example.domain.enums.AnimalType;
 import org.example.provider.CreateAnimalServiceProvider;
 import org.example.service.AnimalsRepository;
-import org.example.service.CreateAnimalService.CreateAnimalService;
+import org.example.domain.service.CreateAnimalService.CreateAnimalService;
 
 import java.time.LocalDate;
 import java.time.Period;

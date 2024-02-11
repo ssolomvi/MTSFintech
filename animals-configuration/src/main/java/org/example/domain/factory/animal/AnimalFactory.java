@@ -1,8 +1,8 @@
-package org.example.factory.animal;
+package org.example.domain.factory.animal;
 
 import org.example.domain.abstraction.Animal;
 import org.example.domain.enums.AnimalType;
-import org.example.factory.Factory;
+import org.example.domain.factory.Factory;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
