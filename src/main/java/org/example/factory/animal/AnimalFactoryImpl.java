@@ -1,4 +1,4 @@
-package org.example.domain.factory.animal;
+package org.example.factory.animal;
 
 import org.example.domain.abstraction.Animal;
 import org.example.domain.enums.AnimalType;

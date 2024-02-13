@@ -2,7 +2,7 @@ package org.example.domain.app.bpp;
 
 import org.example.domain.enums.AnimalType;
 import org.example.provider.AnimalTypeCounter;
-import org.example.domain.service.CreateAnimalService.CreateAnimalService;
+import org.example.service.CreateAnimalService.CreateAnimalService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 

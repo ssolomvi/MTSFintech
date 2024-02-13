@@ -1,5 +1,11 @@
 package org.example.provider;
 
+import org.example.service.CreateAnimalService.CreateAnimalService;
+
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 public final class AnimalTypeCounter {

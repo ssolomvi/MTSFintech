@@ -1,6 +1,6 @@
 package org.example.provider;
 
-import org.example.domain.service.CreateAnimalService.CreateAnimalService;
+import org.example.service.CreateAnimalService.CreateAnimalService;
 
 public interface CreateAnimalServiceProvider {
 
