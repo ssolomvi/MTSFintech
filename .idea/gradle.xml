@@ -10,6 +10,17 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/animal-configuration-starter" />
+            <option value="$PROJECT_DIR$/application" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/application" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/animal-configuration-starter" />
+            <option value="$PROJECT_DIR$/application" />
           </set>
         </option>
       </GradleProjectSettings>
