@@ -1,10 +1,14 @@
 package mts.animals.app.service.impl;
 
+import mts.animals.app.config.AppConfigProperties;
+import mts.animals.app.service.AnimalsRepository;
 import mts.animals.configStarter.abstraction.Animal;
 import mts.animals.configStarter.enums.AnimalType;
 import mts.animals.configStarter.provider.CreateAnimalServiceProvider;
-import mts.animals.app.service.AnimalsRepository;
 import mts.animals.configStarter.service.CreateAnimalService.CreateAnimalService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -13,15 +17,23 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class AnimalsRepositoryImpl implements AnimalsRepository {
 
+    private static final Logger log = LoggerFactory.getLogger(AnimalsRepositoryImpl.class);
+
     private final Animal[] animals = new Animal[10];
-//    private final Animal[] animals = new Animal[(Integer.MAX_VALUE / 100_000)];
 
     private final CreateAnimalServiceProvider createAnimalServiceProvider;
 
+    private final boolean logDebugData;
+
     private boolean initialized;
 
-    public AnimalsRepositoryImpl(CreateAnimalServiceProvider createAnimalServiceProvider) {
+    public AnimalsRepositoryImpl(CreateAnimalServiceProvider createAnimalServiceProvider,
+                                 AppConfigProperties appConfigProperties) {
         this.createAnimalServiceProvider = createAnimalServiceProvider;
+
+        this.logDebugData = Optional.ofNullable(appConfigProperties)
+                .map(AppConfigProperties::getLogDebugData)
+                .orElseThrow();
     }
 
     public void postConstruct() {
@@ -134,7 +146,12 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 && !duplicates.isEmpty()) {
 
             for (Animal duplicate : duplicates) {
-                System.out.println(duplicate);
+                if (logDebugData) {
+                    log.info(String.valueOf(duplicate));
+                } else {
+                    System.out.println(duplicate);
+                }
+
             }
         }
 

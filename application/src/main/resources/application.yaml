@@ -1,0 +1,3 @@
+application.sys.logDebugData: true
+
+application.core.animalCount: 10

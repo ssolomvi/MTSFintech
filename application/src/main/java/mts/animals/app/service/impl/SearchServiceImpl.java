@@ -94,7 +94,10 @@ public class SearchServiceImpl implements SearchService {
                 animalsUnique.add(animal);
             }
         }
+
         printDuplicate(duplicates);
+
         return duplicates.toArray(new Animal[0]);
     }
+
 }

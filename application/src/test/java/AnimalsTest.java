@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class AnimalsTest {
+
     @Nested
     class EqualityTests {
         @Test
@@ -93,4 +94,5 @@ public class AnimalsTest {
             assertArrayEquals(expectedDuplicates, actualDuplicates);
         }
     }
+
 }

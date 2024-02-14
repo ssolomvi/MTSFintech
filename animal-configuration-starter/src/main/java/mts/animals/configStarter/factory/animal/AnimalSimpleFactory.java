@@ -1,6 +1,6 @@
 package mts.animals.configStarter.factory.animal;
 
-import mts.animals.configStarter.AnimalConfigurationProperties;
+import mts.animals.configStarter.config.AnimalConfigurationProperties;
 import mts.animals.configStarter.abstraction.Animal;
 import mts.animals.configStarter.animals.Cat;
 import mts.animals.configStarter.animals.Dog;
