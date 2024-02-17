@@ -1,11 +1,11 @@
 package mts.animals.configStarter.config;
 
-import mts.animals.configStarter.config.AnimalConfigurationProperties;
-import mts.animals.configStarter.provider.CreateAnimalServiceCachedProvider;
-import mts.animals.configStarter.provider.CreateAnimalServiceProvider;
+import mts.animals.configStarter.bpp.CustomBeanPostProcessor;
 import mts.animals.configStarter.factory.animal.AnimalFactory;
 import mts.animals.configStarter.factory.animal.AnimalFactoryImpl;
 import mts.animals.configStarter.factory.animal.AnimalSimpleFactory;
+import mts.animals.configStarter.provider.CreateAnimalServiceCachedProvider;
+import mts.animals.configStarter.provider.CreateAnimalServiceProvider;
 import mts.animals.configStarter.service.CreateAnimalService.CreateAnimalService;
 import mts.animals.configStarter.service.CreateAnimalService.CreateAnimalServiceImpl;
 import org.springframework.beans.factory.ObjectProvider;
@@ -27,6 +27,11 @@ public class Configurations {
 
     @Autowired
     private AnimalConfigurationProperties animalConfigurationProperties;
+
+    @Bean
+    public CustomBeanPostProcessor customBeanPostProcessor() {
+        return new CustomBeanPostProcessor();
+    }
 
     @Bean(name = AnimalFactory.NAME)
     @ConditionalOnMissingBean

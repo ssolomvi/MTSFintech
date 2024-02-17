@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 //@ComponentScan(basePackageClasses = {"animal-configuration-starter:mts.animals.configStarter.service.CreateAnimalService"})
-@SpringBootTest
+@SpringBootTest(classes = TestConfig.class)
 @TestPropertySource(locations="classpath:application-test.properties")
 public class StarterTest {
     @Autowired
@@ -45,7 +45,7 @@ public class StarterTest {
         }
 
         String[] actualAnimalTypes = new String[n];
-        for (int i = 1; i < animalsCreatedByOverride.length; i++) {
+        for (int i = 0; i < animalsCreatedByOverride.length; i++) {
             actualAnimalTypes[i] = animalsCreatedByOverride[i].getBreed();
         }
 
@@ -71,7 +71,7 @@ public class StarterTest {
         }
 
         String[] actualAnimalTypes = new String[n];
-        for (int i = 1; i < animalsCreatedByOverride.length; i++) {
+        for (int i = 0; i < animalsCreatedByOverride.length; i++) {
             actualAnimalTypes[i] = animalsCreatedByOverride[i].getBreed();
         }
 

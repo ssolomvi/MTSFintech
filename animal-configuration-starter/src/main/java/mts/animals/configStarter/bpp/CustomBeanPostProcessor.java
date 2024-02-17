@@ -1,4 +1,4 @@
-package mts.animals.app.bpp;
+package mts.animals.configStarter.bpp;
 
 import mts.animals.configStarter.enums.AnimalType;
 import mts.animals.configStarter.provider.AnimalTypeCounter;

@@ -10,56 +10,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afae11d2-b57d-4311-8ce4-8793d9640376" name="Changes" comment="HW-6 fixed creating CreateAnimalServiceImpl prototypes (now without kostil)">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jayway_jsonpath_json_path_2_7_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__net_bytebuddy_byte_buddy_1_12_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__net_bytebuddy_byte_buddy_agent_1_12_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__net_minidev_accessors_smart_2_4_7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__net_minidev_json_smart_2_4_7.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apiguardian_apiguardian_api_1_1_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_assertj_assertj_core_3_22_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_5_8_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_api_5_8_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_engine_5_8_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_params_5_8_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_platform_junit_platform_commons_1_8_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_platform_junit_platform_engine_1_8_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_mockito_mockito_core_4_5_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_mockito_mockito_junit_jupiter_4_5_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_objenesis_objenesis_3_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ow2_asm_asm_9_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_skyscreamer_jsonassert_1_5_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_test_2_7_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_test_2_7_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_test_autoconfigure_2_7_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_test_5_3_23.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_xmlunit_xmlunit_core_2_9_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.2/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.2/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.2/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/1063589468/MTSFintech.animal-configuration-starter.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1063589468/MTSFintech.animal-configuration-starter.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/classes/java/main/mts/animals/configStarter/abstraction/Instance.class" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/classes/java/main/mts/animals/configStarter/abstraction/Instance.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/classes/java/main/mts/animals/configStarter/config/Configurations.class" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/classes/java/main/mts/animals/configStarter/config/Configurations.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/classes/java/test/mts/animals/configStarter/StarterTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/classes/java/test/mts/animals/configStarter/StarterTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/libs/animal-configuration-starter-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/libs/animal-configuration-starter-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/reports/tests/test/classes/mts.animals.configStarter.StarterTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/reports/tests/test/classes/mts.animals.configStarter.StarterTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/reports/tests/test/packages/mts.animals.configStarter.html" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/reports/tests/test/packages/mts.animals.configStarter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/test-results/test/TEST-mts.animals.configStarter.StarterTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/test-results/test/TEST-mts.animals.configStarter.StarterTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/test-results/test/binary/output.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/test-results/test/binary/output.bin.idx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/tmp/compileTestJava/compileTransaction/stash-dir/StarterTest.class.uniqueId0" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/tmp/compileTestJava/compileTransaction/stash-dir/StarterTest.class.uniqueId0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/animal-configuration-starter/src/main/java/mts/animals/configStarter/config/Configurations.java" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/src/main/java/mts/animals/configStarter/config/Configurations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/src/main/java/mts/animals/configStarter/provider/AnimalTypeCounter.java" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/src/main/java/mts/animals/configStarter/provider/AnimalTypeCounter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/src/main/java/mts/animals/configStarter/service/CreateAnimalService/CreateAnimalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/src/main/java/mts/animals/configStarter/service/CreateAnimalService/CreateAnimalServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/src/test/java/mts/animals/configStarter/StarterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/src/test/java/mts/animals/configStarter/StarterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/src/main/java/mts/animals/app/bpp/CustomBeanPostProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/src/main/java/mts/animals/configStarter/bpp/CustomBeanPostProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/src/main/java/mts/animals/app/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/java/mts/animals/app/config/AppConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/src/main/java/mts/animals/app/service/impl/AnimalsRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/java/mts/animals/app/service/impl/AnimalsRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/src/test/java/mts/animals/app/AnimalStudyAppSpringBootTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/test/java/mts/animals/app/AnimalStudyAppSpringBootTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +80,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/HW-6" />
+        <entry key="$PROJECT_DIR$" value="feature/HW-7" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -165,8 +139,8 @@
       <recent name="mts.animals.app" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.StarterTest.createAnimalServiceProviderCreatesDifferentTypeCreateAnimalService">
-    <configuration name="StarterTest (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.StarterTest.createAnimalServiceCreateRandomAnimalsOverride">
+    <configuration name="AnimalStudyAppSpringBootTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -179,7 +153,7 @@
           <list>
             <option value=":application:test" />
             <option value="--tests" />
-            <option value="&quot;mts.animals.app.StarterTest&quot;" />
+            <option value="&quot;mts.animals.app.AnimalStudyAppSpringBootTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -190,7 +164,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="StarterTest (2)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AnimalStudyAppSpringBootTest.animalsRepositoryIsNotEmpty" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -201,33 +175,9 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value=":animal-configuration-starter:test" />
+            <option value=":application:test" />
             <option value="--tests" />
-            <option value="&quot;mts.animals.configStarter.StarterTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="StarterTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":animal-configuration-starter:test" />
-            <option value="--tests" />
-            <option value="&quot;mts.animals.config.StarterTest&quot;" />
+            <option value="&quot;mts.animals.app.AnimalStudyAppSpringBootTest.animalsRepositoryIsNotEmpty&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -262,7 +212,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="StarterTest.createAnimalServiceProviderCreatesDifferentTypeCreateAnimalService" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="StarterTest.createAnimalServiceCreateRandomAnimalsOverload" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -275,7 +225,31 @@
           <list>
             <option value=":animal-configuration-starter:test" />
             <option value="--tests" />
-            <option value="&quot;mts.animals.configStarter.StarterTest.createAnimalServiceProviderCreatesDifferentTypeCreateAnimalService&quot;" />
+            <option value="&quot;mts.animals.configStarter.StarterTest.createAnimalServiceCreateRandomAnimalsOverload&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="StarterTest.createAnimalServiceCreateRandomAnimalsOverride" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":animal-configuration-starter:test" />
+            <option value="--tests" />
+            <option value="&quot;mts.animals.configStarter.StarterTest.createAnimalServiceCreateRandomAnimalsOverride&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -288,11 +262,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.StarterTest.createAnimalServiceProviderCreatesDifferentTypeCreateAnimalService" />
-        <item itemvalue="Gradle.StarterTest (2)" />
-        <item itemvalue="Gradle.StarterTest" />
-        <item itemvalue="Gradle.StarterTest (1)" />
+        <item itemvalue="Gradle.StarterTest.createAnimalServiceCreateRandomAnimalsOverride" />
         <item itemvalue="Gradle.StarterTest.createAnimalServiceCreateRandomAnimals" />
+        <item itemvalue="Gradle.AnimalStudyAppSpringBootTest.animalsRepositoryIsNotEmpty" />
+        <item itemvalue="Gradle.StarterTest.createAnimalServiceCreateRandomAnimalsOverload" />
+        <item itemvalue="Gradle.AnimalStudyAppSpringBootTest" />
       </list>
     </recent_temporary>
   </component>
@@ -379,13 +353,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/animal-configuration-starter/src/test/java/mts/animals/configStarter/StarterTest.java</url>
-          <line>102</line>
-          <option name="timeStamp" value="3" />
+          <line>105</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/animal-configuration-starter/src/main/java/mts/animals/configStarter/provider/CreateAnimalServiceCachedProvider.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="4" />
+          <line>40</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/application/src/test/java/mts/animals/app/AnimalStudyAppSpringBootTest.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
