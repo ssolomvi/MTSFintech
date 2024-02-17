@@ -16,6 +16,7 @@ dependencies {
 //    testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation 'org.springframework.boot:spring-boot-starter:2.7.4'
     implementation 'org.springframework.boot:spring-boot-autoconfigure:2.7.4'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.4'
 }
 
 test {

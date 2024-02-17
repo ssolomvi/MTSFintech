@@ -8,6 +8,9 @@
       <module name="MTSFintech.application" target="17" />
       <module name="MTSFintech.application.main" target="17" />
       <module name="MTSFintech.application.test" target="17" />
+      <module name="org.example.MTSFintech.application" target="17" />
+      <module name="org.example.MTSFintech.application.main" target="17" />
+      <module name="org.example.MTSFintech.application.test" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

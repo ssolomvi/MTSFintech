@@ -4,7 +4,9 @@ import mts.animals.configStarter.abstraction.Animal;
 import mts.animals.configStarter.enums.AnimalType;
 import mts.animals.configStarter.factory.animal.AnimalFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CreateAnimalServiceImpl implements CreateAnimalService {
 
     private final AnimalFactory animalFactory;
@@ -41,7 +43,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         int count = 0;
         Animal animal;
         do {
-            animal = animalFactory.createRandomAnimal();
+            animal = animalFactory.createRandomAnimal(animalType);
             System.out.println(animal);
 
             animals[count++] = animal;
@@ -60,7 +62,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
 
         Animal animal;
         for (int i = 0; i < n; i++) {
-            animal = animalFactory.createRandomAnimal();
+            animal = animalFactory.createRandomAnimal(animalType);
             System.out.println(animal);
 
             animals[i] = animal;

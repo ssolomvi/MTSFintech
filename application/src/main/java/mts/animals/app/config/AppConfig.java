@@ -5,12 +5,13 @@ import mts.animals.app.service.AnimalsRepository;
 import mts.animals.app.service.impl.AnimalsRepositoryImpl;
 import mts.animals.configStarter.provider.CreateAnimalServiceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @EnableConfigurationProperties(AppConfigProperties.class)
-@Configuration
+@SpringBootConfiguration
 public class AppConfig {
 
     @Bean

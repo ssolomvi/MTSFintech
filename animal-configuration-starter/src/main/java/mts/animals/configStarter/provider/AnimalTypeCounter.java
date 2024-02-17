@@ -53,7 +53,17 @@ public final class AnimalTypeCounter {
         } finally {
             lock.unlock();
         }
+    }
 
+    public static void reset() {
+        lock.lock();
+
+        try {
+            counter = 0L;
+        }
+        finally {
+            lock.unlock();
+        }
     }
 
     public static void increment() {

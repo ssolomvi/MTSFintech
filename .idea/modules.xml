@@ -9,6 +9,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MTSFintech.application.iml" filepath="$PROJECT_DIR$/.idea/modules/MTSFintech.application.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MTSFintech.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/MTSFintech.application.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MTSFintech.application.test.iml" filepath="$PROJECT_DIR$/.idea/modules/MTSFintech.application.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.iml" filepath="$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.test.iml" filepath="$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.test.iml" />
     </modules>
   </component>
 </project>

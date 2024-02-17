@@ -19,7 +19,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
 
     private static final Logger log = LoggerFactory.getLogger(AnimalsRepositoryImpl.class);
 
-    private final Animal[] animals = new Animal[10];
+    private final Animal[] animals = new Animal[100];
 
     private final CreateAnimalServiceProvider createAnimalServiceProvider;
 

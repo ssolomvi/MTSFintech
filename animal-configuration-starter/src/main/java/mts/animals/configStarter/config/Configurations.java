@@ -22,7 +22,6 @@ import java.lang.reflect.Field;
 import java.util.Objects;
 
 @Configuration
-//@ConditionalOnClass(...)
 @EnableConfigurationProperties(AnimalConfigurationProperties.class)
 public class Configurations {
 
