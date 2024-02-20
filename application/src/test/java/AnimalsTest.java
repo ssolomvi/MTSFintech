@@ -27,6 +27,7 @@ public class AnimalsTest {
 
     @Nested
     class EqualityTests {
+
         @Test
         @DisplayName("Animals equality")
         public void AnimalsEqualTest() {
@@ -56,7 +57,6 @@ public class AnimalsTest {
                         "Purring", LocalDate.of(2020, 10, 16))
         };
 
-
         @Test
         @DisplayName("Find leap year names")
         public void findLeapYearNamesTest() {
@@ -73,12 +73,13 @@ public class AnimalsTest {
         public void findOlderAnimalTest(int param) {
             Animal[] expectedOlderThan;
             if (param == 1) {
-                expectedOlderThan = new Animal[]{ animals[0], animals[1], animals[2], animals[4], animals[5] };
+                expectedOlderThan = new Animal[]{animals[0], animals[1], animals[2], animals[4], animals[5]};
             } else if (param == 2) {
-                expectedOlderThan = new Animal[]{ animals[0], animals[2], animals[4], animals[5] };
+                expectedOlderThan = new Animal[]{animals[0], animals[2], animals[4], animals[5]};
             } else {
-                expectedOlderThan = new Animal[]{animals[0], animals[4] };
+                expectedOlderThan = new Animal[]{animals[0], animals[4]};
             }
+
             SearchService searchService = new SearchServiceImpl();
             Animal[] actualOlderThan = searchService.findOlderAnimal(animals, param);
             assertArrayEquals(expectedOlderThan, actualOlderThan);

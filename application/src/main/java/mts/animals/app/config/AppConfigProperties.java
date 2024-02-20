@@ -1,26 +1,42 @@
 package mts.animals.app.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+
+import java.util.Map;
 
 /**
  * @author Vladislav Gruzdov
  */
-@ConfigurationProperties
+@PropertySource("classpath:application.yaml")
+@ConfigurationProperties(prefix = "application")
 public class AppConfigProperties {
 
-    @Value("${application.sys.logDebugData}")
-    private boolean logDebugData;
-
-    @Value("${application.core.animalCount}")
-    private int animalCount;
+    private Map<String, String> sys;
+    private Map<String, String> core;
 
     public boolean getLogDebugData() {
-        return logDebugData;
+        return Boolean.parseBoolean(sys.getOrDefault("logDebugData", ""));
     }
 
     public int getAnimalCount() {
-        return animalCount;
+        return Integer.parseInt(core.getOrDefault("animalCount", "0"));
+    }
+
+    public Map<String, String> getSys() {
+        return sys;
+    }
+
+    public void setSys(Map<String, String> sys) {
+        this.sys = sys;
+    }
+
+    public Map<String, String> getCore() {
+        return core;
+    }
+
+    public void setCore(Map<String, String> core) {
+        this.core = core;
     }
 
 }

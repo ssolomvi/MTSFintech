@@ -21,6 +21,7 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class AnimalStudyAppSpringBootTest {
+
     @Autowired
     private CustomBeanPostProcessor customBeanPostProcessor;
 
@@ -34,6 +35,7 @@ public class AnimalStudyAppSpringBootTest {
         if (Objects.isNull(field)) {
             throw new RuntimeException("Caramba, reflection not help");
         }
+
         ReflectionUtils.makeAccessible(field);
 
         return field;
@@ -96,4 +98,5 @@ public class AnimalStudyAppSpringBootTest {
         Mockito.verify(createAnimalService).setAnimalType(expectedType);
         assertEquals(1, AnimalTypeCounter.getCount());
     }
+
 }

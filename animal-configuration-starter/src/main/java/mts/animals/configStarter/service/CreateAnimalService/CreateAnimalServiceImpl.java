@@ -4,17 +4,11 @@ import mts.animals.configStarter.abstraction.Animal;
 import mts.animals.configStarter.enums.AnimalType;
 import mts.animals.configStarter.factory.animal.AnimalFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
 public class CreateAnimalServiceImpl implements CreateAnimalService {
 
     private final AnimalFactory animalFactory;
     private AnimalType animalType;
-
-    public void setAnimalType(AnimalType animalType) {
-        this.animalType = animalType;
-    }
 
     @Autowired
     public CreateAnimalServiceImpl(AnimalFactory animalFactory) {
@@ -23,6 +17,16 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         }
 
         this.animalFactory = animalFactory;
+    }
+
+    @Override
+    public void setAnimalType(AnimalType animalType) {
+        this.animalType = animalType;
+    }
+
+    @Override
+    public AnimalType getAnimalType() {
+        return animalType;
     }
 
     @Override

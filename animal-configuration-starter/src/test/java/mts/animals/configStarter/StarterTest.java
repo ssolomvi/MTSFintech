@@ -6,8 +6,8 @@ import mts.animals.configStarter.provider.CreateAnimalServiceProvider;
 import mts.animals.configStarter.service.CreateAnimalService.CreateAnimalService;
 import mts.animals.configStarter.service.CreateAnimalService.CreateAnimalServiceImpl;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.util.ReflectionUtils;
 
@@ -17,24 +17,21 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-//@ComponentScan(basePackageClasses = {"animal-configuration-starter:mts.animals.configStarter.service.CreateAnimalService"})
 @SpringBootTest(classes = TestConfig.class)
-@TestPropertySource(locations="classpath:application-test.properties")
+@TestPropertySource(locations = "classpath:application-test.yml")
 public class StarterTest {
-    @Autowired
-    private CreateAnimalServiceProvider createCreateAnimalServiceProvider;
 
-    @Autowired
-    private CreateAnimalService createCreateAnimalService;
+    @SpyBean
+    private CreateAnimalServiceProvider createCreateAnimalServiceProvider;
 
     @Test
     public void createAnimalServiceCreateRandomAnimalsOverride() {
         int n = 10;
 
         Animal[] animalsCreatedByOverride;
-
-        if (createCreateAnimalService instanceof CreateAnimalServiceImpl) {
-            animalsCreatedByOverride = createCreateAnimalService.createRandomAnimals();
+        CreateAnimalService service = createCreateAnimalServiceProvider.createCreateAnimalService();
+        if (service instanceof CreateAnimalServiceImpl) {
+            animalsCreatedByOverride = service.createRandomAnimals();
         } else {
             throw new IllegalArgumentException("createCreateAnimalService is not an instance of CreateAnimalServiceImpl =(");
         }
@@ -58,8 +55,9 @@ public class StarterTest {
 
         Animal[] animalsCreatedByOverride;
 
-        if (createCreateAnimalService instanceof CreateAnimalServiceImpl) {
-            animalsCreatedByOverride = ((CreateAnimalServiceImpl)createCreateAnimalService)
+        CreateAnimalService service = createCreateAnimalServiceProvider.createCreateAnimalService();
+        if (service instanceof CreateAnimalServiceImpl) {
+            animalsCreatedByOverride = ((CreateAnimalServiceImpl) service)
                     .createRandomAnimals(n);
         } else {
             throw new IllegalArgumentException("createCreateAnimalService is not an instance of CreateAnimalServiceImpl =(");
@@ -82,8 +80,11 @@ public class StarterTest {
     // Generates an array of 10 random animals. Expect animals of different types.
     @Test
     public void createAnimalServiceCreateRandomAnimals() {
-        createCreateAnimalService.setAnimalType(AnimalType.TIGER);
-        Animal randomAnimal = createCreateAnimalService.createAnimal();
+        CreateAnimalService service = createCreateAnimalServiceProvider.createCreateAnimalService();
+        service.setAnimalType(AnimalType.TIGER);
+
+        var randomAnimal = service.createAnimal();
+
         assertNotEquals("cat", randomAnimal.getBreed());
     }
 
@@ -109,6 +110,4 @@ public class StarterTest {
         assertNotEquals(typeFirst, typeSecond);
     }
 
-    // it might be another test to check for animals names
-    // (they were brought from application-test.properties, not application.properties)
 }

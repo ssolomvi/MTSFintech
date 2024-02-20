@@ -3,11 +3,10 @@ package mts.animals.configStarter.provider;
 import mts.animals.configStarter.enums.AnimalType;
 import mts.animals.configStarter.service.CreateAnimalService.CreateAnimalService;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.util.ReflectionUtils;
 
-import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CreateAnimalServiceCachedProvider implements CreateAnimalServiceProvider {
 
@@ -30,12 +29,13 @@ public class CreateAnimalServiceCachedProvider implements CreateAnimalServicePro
     @Override
     public CreateAnimalService createCreateAnimalService() {
         long count = AnimalTypeCounter.getCount();
+        int length = AnimalType.values().length;
         if (count > 0
-                && (count >= AnimalType.values().length)) {
+                && (count >= length)) {
 
-            return new HashSet<>(strongCache.values())
-                    .iterator()
-                    .next();
+            List<CreateAnimalService> cachedServices = new ArrayList<>(strongCache.values());
+
+            return cachedServices.get(ThreadLocalRandom.current().nextInt(length));
         }
 
         CreateAnimalService result = animalServiceObjectProvider.getIfAvailable();
@@ -43,16 +43,10 @@ public class CreateAnimalServiceCachedProvider implements CreateAnimalServicePro
             throw new RuntimeException("Caramba!");
         }
 
-        Field field = ReflectionUtils.findField(result.getClass(), "animalType", AnimalType.class);
-        if (Objects.isNull(field)) {
-            throw new RuntimeException("Caramba, reflection not help");
+        var animalType = result.getAnimalType();
+        if (Objects.nonNull(animalType)) {
+            strongCache.put(animalType, result);
         }
-
-        ReflectionUtils.makeAccessible(field);
-
-        AnimalType type = (AnimalType) ReflectionUtils.getField(field, result);
-
-        strongCache.put(type, result);
 
         return result;
     }

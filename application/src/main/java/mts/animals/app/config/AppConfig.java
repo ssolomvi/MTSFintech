@@ -1,6 +1,5 @@
 package mts.animals.app.config;
 
-import mts.animals.configStarter.bpp.CustomBeanPostProcessor;
 import mts.animals.app.service.AnimalsRepository;
 import mts.animals.app.service.impl.AnimalsRepositoryImpl;
 import mts.animals.configStarter.provider.CreateAnimalServiceProvider;

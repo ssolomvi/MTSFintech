@@ -10,6 +10,8 @@ public interface CreateAnimalService {
 
     void setAnimalType(AnimalType animalType);
 
+    AnimalType getAnimalType();
+
     Animal createAnimal();
 
     /**

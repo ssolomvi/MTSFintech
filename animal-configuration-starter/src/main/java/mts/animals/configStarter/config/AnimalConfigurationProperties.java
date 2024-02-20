@@ -1,37 +1,50 @@
 package mts.animals.configStarter.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
-@ConfigurationProperties
+@PropertySource("classpath:application.yml")
+@ConfigurationProperties(prefix = "animal")
 public class AnimalConfigurationProperties {
 
-    @Value("#{'${animal.cat.names}'.split(',')}")
-    private List<String> catNames;
-    @Value("#{'${animal.dog.names}'.split(',')}")
-    private List<String> dogNames;
-    @Value("#{'${animal.shark.names}'.split(',')}")
-    private List<String> sharkNames;
-    @Value("#{'${animal.tiger.names}'.split(',')}")
-    private List<String> tigerNames;
+    private Map<String, List<String>> names;
+
+    public Map<String, List<String>> getNames() {
+        return Collections.unmodifiableMap(names);
+    }
+
+    public void setNames(Map<String, List<String>> names) {
+        this.names = names;
+    }
 
     public List<String> getCatNames() {
-        return Collections.unmodifiableList(catNames);
+        return findNames("cat");
     }
 
     public List<String> getDogNames() {
-        return Collections.unmodifiableList(dogNames);
+        return findNames("dog");
     }
 
     public List<String> getSharkNames() {
-        return Collections.unmodifiableList(sharkNames);
+        return findNames("shark");
     }
 
     public List<String> getTigerNames() {
-        return Collections.unmodifiableList(tigerNames);
+        return findNames("tiger");
+    }
+
+    private List<String> findNames(String typeName) {
+        var result = names.getOrDefault(typeName, Collections.emptyList());
+        //this object comparison is an exception because we are comparing a reference to a constant
+        if (Collections.<String>emptyList() == result) {
+            return result;
+        }
+
+        return Collections.unmodifiableList(result);
     }
 
 }

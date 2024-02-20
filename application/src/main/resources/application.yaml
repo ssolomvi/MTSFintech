@@ -1,3 +1,5 @@
-application.sys.logDebugData: true
-
-application.core.animalCount: 10
+application:
+  sys:
+    logDebugData: true
+  core:
+    animalCount: 10
