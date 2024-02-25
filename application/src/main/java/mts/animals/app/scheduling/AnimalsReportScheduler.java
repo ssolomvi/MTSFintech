@@ -10,9 +10,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
+import java.util.StringJoiner;
 
 @Component(AnimalsReportSchedulerMBean.NAME)
 public class AnimalsReportScheduler implements AnimalsReportSchedulerMBean {
@@ -35,36 +35,39 @@ public class AnimalsReportScheduler implements AnimalsReportSchedulerMBean {
 
     private String getToStringAnimalsBornInLeapYears() {
         Map<String, LocalDate> leapYearAnimals = animalsRepository.findLeapYearNames();
-        StringBuilder builder = new StringBuilder();
+        var builder = new StringBuilder();
         for (Map.Entry<String, LocalDate> entry : leapYearAnimals.entrySet()) {
-            builder
-                    .append(entry.getKey())
+            builder.append(entry.getKey())
                     .append(" : ")
                     .append(entry.getValue())
-                    .append(";\t");
+                    .append(";\n");
         }
+
         return builder.toString();
     }
 
     private String getToStringOlderAnimals() {
         Map<Animal, Integer> olderThanAnimals = animalsRepository.findOlderAnimal(animalCount);
-        StringBuilder builder = new StringBuilder();
+        var builder = new StringBuilder();
         for (Map.Entry<Animal, Integer> entry : olderThanAnimals.entrySet()) {
-            builder
-                    .append(entry.getKey())
+            builder.append(entry.getKey())
                     .append(" : ")
                     .append(entry.getValue())
-                    .append(";\t");
+                    .append(";\n");
         }
+
         return builder.toString();
     }
 
     @Scheduled(fixedRate = 60_000)
     @Override
     public String executeTask() {
-        log.info("Animals born in leap years: {}", getToStringAnimalsBornInLeapYears());
-        log.info("Animals older than {}: {}", animalCount, getToStringOlderAnimals());
-        log.info("Duplicates: {}", animalsRepository.findDuplicate());
+        var joiner = new StringJoiner("\n");
+        joiner.add("Animals born in leap years: " + getToStringAnimalsBornInLeapYears());
+        joiner.add(String.format("Animals older than %d: %s", animalCount, getToStringOlderAnimals()));
+        joiner.add("Duplicates: " + animalsRepository.findDuplicate());
+
+        log.info(joiner.toString());
 
         animalsRepository.printDuplicate();
 

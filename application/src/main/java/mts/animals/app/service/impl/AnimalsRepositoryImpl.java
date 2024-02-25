@@ -159,16 +159,21 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     @Override
     public void printDuplicate() {
         Map<String, Integer> duplicates = findDuplicate();
+        var sb = new StringBuilder();
+
         if (Objects.nonNull(duplicates) && !duplicates.isEmpty()) {
-
             for (Map.Entry<String, Integer> entry : duplicates.entrySet()) {
-                if (logDebugData) {
-                    log.info(entry.getKey() + "=" + entry.getValue());
-                } else {
-                    System.out.println(entry.getKey() + "=" + entry.getValue());
-                }
-
+                sb.append(entry.getKey())
+                        .append("=")
+                        .append(entry.getValue())
+                        .append("\n");
             }
+        }
+
+        if (logDebugData) {
+            log.info(sb.toString());
+        } else {
+            System.out.println(sb);
         }
 
     }
