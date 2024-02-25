@@ -5,6 +5,11 @@ import mts.animals.configStarter.enums.AnimalType;
 import mts.animals.configStarter.factory.animal.AnimalFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class CreateAnimalServiceImpl implements CreateAnimalService {
 
     private final AnimalFactory animalFactory;
@@ -35,12 +40,13 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
     }
 
     /**
-     * Creates an array of size 10 of randomly generated animals with use of AnimalSimpleFactory
+     * Creates a map of 10 randomly generated animals with use of AnimalSimpleFactory,
+     * where key is the type of animal created and value is animals created with this type
      */
     @Override
-    public Animal[] createRandomAnimals() {
+    public Map<String, List<Animal>> createRandomAnimals() {
         int maxCount = 10;
-        Animal[] animals = new Animal[maxCount];
+        Map<String, List<Animal>> animals = new HashMap<>(AnimalType.values().length);
 
         System.out.println("It's override method in class CreateAnimalServiceImpl");
 
@@ -50,18 +56,22 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
             animal = animalFactory.createRandomAnimal(animalType);
             System.out.println(animal);
 
-            animals[count++] = animal;
+            animals.computeIfAbsent(animal.getBreed(), k -> new ArrayList<>());
 
+            animals.get(animal.getBreed()).add(animal);
+            count++;
         } while (count < maxCount);
 
         return animals;
     }
 
     /**
-     * Creates an array of size n of randomly generated animals with use of AnimalSimpleFactory
+     * Creates a map of n randomly generated animals with use of AnimalSimpleFactory,
+     * where key is the type of animal created and value is animals created with this type
      */
-    public Animal[] createRandomAnimals(int n) {
-        Animal[] animals = new Animal[n];
+    public Map<String, List<Animal>> createRandomAnimals(int n) {
+        Map<String, List<Animal>> animals = new HashMap<>(AnimalType.values().length);
+
         System.out.println("It's overload method in class CreateAnimalServiceImpl");
 
         Animal animal;
@@ -69,7 +79,8 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
             animal = animalFactory.createRandomAnimal(animalType);
             System.out.println(animal);
 
-            animals[i] = animal;
+            animals.computeIfAbsent(animal.getBreed(), k -> new ArrayList<>());
+            animals.get(animal.getBreed()).add(animal);
         }
 
         return animals;

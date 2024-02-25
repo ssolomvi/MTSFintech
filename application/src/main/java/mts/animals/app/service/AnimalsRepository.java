@@ -2,17 +2,19 @@ package mts.animals.app.service;
 
 import mts.animals.configStarter.abstraction.Animal;
 
+import java.time.LocalDate;
+import java.util.Map;
 import java.util.Set;
 
 public interface AnimalsRepository {
 
     String NAME = "example_AnimalsRepository";
 
-    String[] findLeapYearNames();
+    Map<String, LocalDate> findLeapYearNames();
 
-    Animal[] findOlderAnimal(int n);
+    Map<Animal, Integer> findOlderAnimal(int n);
 
-    Set<Animal> findDuplicate();
+    Map<String, Integer> findDuplicate();
 
     void printDuplicate();
 

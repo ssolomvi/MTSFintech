@@ -4,6 +4,11 @@ import mts.animals.configStarter.abstraction.Animal;
 import mts.animals.configStarter.enums.AnimalType;
 import mts.animals.configStarter.factory.animal.AnimalSimpleFactory;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public interface CreateAnimalService {
 
     String NAME = "example_CreateAnimalService";
@@ -15,11 +20,12 @@ public interface CreateAnimalService {
     Animal createAnimal();
 
     /**
-     * Creates an array of size 10 of randomly generated animals with use of AnimalSimpleFactory
+     * Creates a map of 10 randomly generated animals with use of AnimalSimpleFactory,
+     * where key is the type of animal created and value is animals created with this type
      */
-    default Animal[] createRandomAnimals() {
+    default Map<String, List<Animal>> createRandomAnimals() {
         int maxCount = 10;
-        Animal[] animals = new Animal[maxCount];
+        Map<String, List<Animal>> animals = new HashMap<>(AnimalType.values().length);
 
         System.out.println("It's default method in interface CreateAnimalService");
 
@@ -29,7 +35,10 @@ public interface CreateAnimalService {
             animal = AnimalSimpleFactory.createRandomAnimal();
             System.out.println(animal);
 
-            animals[count++] = animal;
+            animals.computeIfAbsent(animal.getBreed(), k -> new ArrayList<>());
+
+            animals.get(animal.getBreed()).add(animal);
+            count++;
         }
 
         return animals;

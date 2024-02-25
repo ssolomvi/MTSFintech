@@ -1,7 +1,9 @@
 package mts.animals.configStarter;
 
 import mts.animals.configStarter.abstraction.Animal;
+import mts.animals.configStarter.animals.Cat;
 import mts.animals.configStarter.enums.AnimalType;
+import mts.animals.configStarter.factory.animal.AnimalFactory;
 import mts.animals.configStarter.provider.CreateAnimalServiceProvider;
 import mts.animals.configStarter.service.CreateAnimalService.CreateAnimalService;
 import mts.animals.configStarter.service.CreateAnimalService.CreateAnimalServiceImpl;
@@ -12,10 +14,12 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
-import java.util.Objects;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = TestConfig.class)
 @TestPropertySource(locations = "classpath:application-test.yml")
@@ -25,55 +29,34 @@ public class StarterTest {
     private CreateAnimalServiceProvider createCreateAnimalServiceProvider;
 
     @Test
-    public void createAnimalServiceCreateRandomAnimalsOverride() {
-        int n = 10;
-
-        Animal[] animalsCreatedByOverride;
-        CreateAnimalService service = createCreateAnimalServiceProvider.createCreateAnimalService();
-        if (service instanceof CreateAnimalServiceImpl) {
-            animalsCreatedByOverride = service.createRandomAnimals();
-        } else {
-            throw new IllegalArgumentException("createCreateAnimalService is not an instance of CreateAnimalServiceImpl =(");
-        }
-
-        String[] initialAnimalTypes = new String[n];
-        for (int i = 0; i < initialAnimalTypes.length; i++) {
-            initialAnimalTypes[i] = animalsCreatedByOverride[0].getBreed();
-        }
-
-        String[] actualAnimalTypes = new String[n];
-        for (int i = 0; i < animalsCreatedByOverride.length; i++) {
-            actualAnimalTypes[i] = animalsCreatedByOverride[i].getBreed();
-        }
-
-        assertArrayEquals(initialAnimalTypes, actualAnimalTypes);
-    }
-
-    @Test
     public void createAnimalServiceCreateRandomAnimalsOverload() {
         int n = 10;
 
-        Animal[] animalsCreatedByOverride;
+        Map<String, List<Animal>> animalsCreatedByOverload;
 
         CreateAnimalService service = createCreateAnimalServiceProvider.createCreateAnimalService();
         if (service instanceof CreateAnimalServiceImpl) {
-            animalsCreatedByOverride = ((CreateAnimalServiceImpl) service)
+            animalsCreatedByOverload = ((CreateAnimalServiceImpl) service)
                     .createRandomAnimals(n);
         } else {
             throw new IllegalArgumentException("createCreateAnimalService is not an instance of CreateAnimalServiceImpl =(");
         }
 
-        String[] initialAnimalTypes = new String[n];
-        for (int i = 0; i < initialAnimalTypes.length; i++) {
-            initialAnimalTypes[i] = animalsCreatedByOverride[0].getBreed();
+        List<String> initialAnimalTypes = new ArrayList<>(n);
+        Map.Entry<String, List<Animal>> firstEntry = animalsCreatedByOverload.entrySet().iterator().next();
+        String firstAnimalBreed = firstEntry.getKey();
+        for (int i = 0; i < n; i++) {
+            initialAnimalTypes.add(firstAnimalBreed);
         }
 
-        String[] actualAnimalTypes = new String[n];
-        for (int i = 0; i < animalsCreatedByOverride.length; i++) {
-            actualAnimalTypes[i] = animalsCreatedByOverride[i].getBreed();
+        List<String> actualAnimalTypes = new ArrayList<>(n);
+        for (Map.Entry<String, List<Animal>> entry : animalsCreatedByOverload.entrySet()) {
+            for (Animal entryAnimal: entry.getValue()) {
+                actualAnimalTypes.add(entryAnimal.getBreed());
+            }
         }
 
-        assertArrayEquals(initialAnimalTypes, actualAnimalTypes);
+        assertEquals(initialAnimalTypes, actualAnimalTypes);
     }
 
 
@@ -108,6 +91,20 @@ public class StarterTest {
         AnimalType typeSecond = getType(createAnimalServiceSecond);
 
         assertNotEquals(typeFirst, typeSecond);
+    }
+
+    // check if createAnimalService.createRandomAnimals() returns the correct map
+    @Test
+    public void returnValueByCreateAnimalServiceCreateRandomAnimals() {
+        CreateAnimalService createAnimalService = createCreateAnimalServiceProvider.createCreateAnimalService();
+        Map<String, List<Animal>> actualMap = createAnimalService.createRandomAnimals();
+
+        for (Map.Entry<String, List<Animal>> entry : actualMap.entrySet()) {
+            String breed = entry.getKey();
+            for (Animal animal : entry.getValue()) {
+                assertEquals(animal.getBreed(), breed);
+            }
+        }
     }
 
 }

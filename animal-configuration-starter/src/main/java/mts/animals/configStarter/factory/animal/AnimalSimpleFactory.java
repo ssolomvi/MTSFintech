@@ -40,43 +40,23 @@ public final class AnimalSimpleFactory {
         int randCoefficient = ThreadLocalRandom.current()
                 .nextInt(0, 100_000);
 
-        switch (type) {
-            case SHARK:
-                return createRandomShark(randCoefficient);
-
-            case TIGER:
-                return createRandomTiger(randCoefficient);
-
-            case DOG:
-                return createRandomDog(randCoefficient);
-
-            case CAT:
-                return createRandomCat(randCoefficient);
-
-            default:
-                throw new UnsupportedOperationException("Unsupported case");
-        }
+        return switch (type) {
+            case SHARK -> createRandomShark(randCoefficient);
+            case TIGER -> createRandomTiger(randCoefficient);
+            case DOG -> createRandomDog(randCoefficient);
+            case CAT -> createRandomCat(randCoefficient);
+        };
 
     }
 
     public static Animal createAnimal(AnimalType type, String breed, String name, BigDecimal cost,
                                       String character, LocalDate birthDate) {
-        switch (type) {
-            case CAT:
-                return new Cat(breed, name, cost, character, birthDate);
-
-            case DOG:
-                return new Dog(breed, name, cost, character, birthDate);
-
-            case TIGER:
-                return new Tiger(breed, name, cost, character, birthDate);
-
-            case SHARK:
-                return new Shark(breed, name, cost, character, birthDate);
-
-            default:
-                throw new UnsupportedOperationException("Unsupported case");
-        }
+        return switch (type) {
+            case CAT -> new Cat(breed, name, cost, character, birthDate);
+            case DOG -> new Dog(breed, name, cost, character, birthDate);
+            case TIGER -> new Tiger(breed, name, cost, character, birthDate);
+            case SHARK -> new Shark(breed, name, cost, character, birthDate);
+        };
 
     }
 

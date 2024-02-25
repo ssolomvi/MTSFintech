@@ -8,7 +8,6 @@ import mts.animals.configStarter.provider.CreateAnimalServiceProvider;
 import mts.animals.configStarter.service.CreateAnimalService.CreateAnimalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -19,7 +18,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
 
     private static final Logger log = LoggerFactory.getLogger(AnimalsRepositoryImpl.class);
 
-    private final Animal[] animals = new Animal[100];
+    private final List<Animal> animals = new ArrayList<>(100);
 
     private final CreateAnimalServiceProvider createAnimalServiceProvider;
 
@@ -50,9 +49,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
             }
 
             int randInt;
-            for (int i = 0; i < animals.length; i++) {
+            for (int i = 0; i < animals.size(); i++) {
                 randInt = ThreadLocalRandom.current().nextInt(0, 3);
-                animals[i] = prototypes.get(randInt).createAnimal();
+                animals.add(prototypes.get(randInt).createAnimal());
             }
 
             initialized = true;
@@ -63,35 +62,42 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     /**
      * Finds animals which were born is leap year and returns an array of their names
      *
-     * @return Array of animals' names which were born in leap year
+     * @return Map, where key is animal's type +  animals' name and value is its birthday
      */
     @Override
-    public String[] findLeapYearNames() {
-        List<String> names = new ArrayList<>();
+    public Map<String, LocalDate> findLeapYearNames() {
+        Map<String, LocalDate> namesAndBirthdays = new HashMap<>();
         for (Animal animal : animals) {
             if (Objects.nonNull(animal)) {
                 LocalDate birthdate = animal.getBirthDate();
-                if (Objects.nonNull(birthdate)
-                        && birthdate.isLeapYear()) {
-
-                    names.add(animal.getName());
+                if (Objects.nonNull(birthdate) && birthdate.isLeapYear()) {
+                    namesAndBirthdays.put(animal.getBreed() + " " + animal.getName(),
+                            animal.getBirthDate());
                 }
             }
         }
 
-        return names.toArray(new String[0]);
+        return namesAndBirthdays;
     }
 
 
     /**
-     * Finds animals older than argument n
+     * Finds animals older than argument n. If there are no animals, older than n,
+     * returns the oldest animal
      *
      * @param n Represent years count
-     * @return Array of animals which are older than argument n
+     * @return Map, where key is  of animals which are older than argument n
      */
     @Override
-    public Animal[] findOlderAnimal(int n) {
-        List<Animal> animalsOlderN = new ArrayList<>();
+    public Map<Animal, Integer> findOlderAnimal(int n) {
+        // todo: if not use animals array in future commits, check if the input array is empty
+        if (n <= 0) {
+            throw new IllegalArgumentException("param n cannot be less or equal to 0");
+        }
+
+        Map<Animal, Integer> animalsOlderThanN = new HashMap<>();
+        Animal theOldestAnimal = null;
+        int theOldestAnimalAge = 0;
         var now = LocalDate.now();
 
         for (Animal animal : animals) {
@@ -100,36 +106,47 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 if (Objects.nonNull(birthDate)) {
                     Period betweenNowAndBirthdate = Period.between(birthDate, now);
                     int yearsBetweenNowAndAnimalsBirthdate = betweenNowAndBirthdate.getYears();
+
                     if (yearsBetweenNowAndAnimalsBirthdate > n) {
-                        animalsOlderN.add(animal);
+                        animalsOlderThanN.put(animal, yearsBetweenNowAndAnimalsBirthdate);
 
                     } else if (yearsBetweenNowAndAnimalsBirthdate == n
                             && (betweenNowAndBirthdate.getDays() != 0 || betweenNowAndBirthdate.getMonths() != 0)) {
-                        animalsOlderN.add(animal);
-                    }
+                        animalsOlderThanN.put(animal, yearsBetweenNowAndAnimalsBirthdate);
 
+                    } else if (yearsBetweenNowAndAnimalsBirthdate > theOldestAnimalAge) {
+                        theOldestAnimal = animal;
+                        theOldestAnimalAge = yearsBetweenNowAndAnimalsBirthdate;
+                    }
                 }
             }
-
         }
 
-        return animalsOlderN.toArray(new Animal[0]);
+        if (animalsOlderThanN.isEmpty()) {
+            animalsOlderThanN.put(theOldestAnimal, theOldestAnimalAge);
+        }
+
+        return animalsOlderThanN;
     }
 
     /**
      * Find duplicate animals and prints them in {@code System.out}
      *
-     * @return Found duplicates
+     * @return Found duplicates and times the certain duplicate was met
      */
     @Override
-    public Set<Animal> findDuplicate() {
-        Set<Animal> duplicates = new LinkedHashSet<>();
+    public Map<String, Integer> findDuplicate() {
+        Map<String, Integer> duplicates = new HashMap<>();
         // not for "uniqueness", but for search speed
         Set<Animal> animalsUnique = new HashSet<>();
         for (Animal animal : animals) {
             if (Objects.nonNull(animal)) {
                 if (animalsUnique.contains(animal)) {
-                    duplicates.add(animal);
+                    if (duplicates.containsKey(animal.getBreed())) {
+                        duplicates.put(animal.getBreed(), duplicates.get(animal.getBreed()) + 1);
+                    } else {
+                        duplicates.put(animal.getBreed(), 1);
+                    }
                 } else {
                     animalsUnique.add(animal);
                 }
@@ -141,15 +158,14 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
 
     @Override
     public void printDuplicate() {
-        Set<Animal> duplicates = findDuplicate();
-        if (Objects.nonNull(duplicates)
-                && !duplicates.isEmpty()) {
+        Map<String, Integer> duplicates = findDuplicate();
+        if (Objects.nonNull(duplicates) && !duplicates.isEmpty()) {
 
-            for (Animal duplicate : duplicates) {
+            for (Map.Entry<String, Integer> entry : duplicates.entrySet()) {
                 if (logDebugData) {
-                    log.info(String.valueOf(duplicate));
+                    log.info(entry.getKey() + "=" + entry.getValue());
                 } else {
-                    System.out.println(duplicate);
+                    System.out.println(entry.getKey() + "=" + entry.getValue());
                 }
 
             }
