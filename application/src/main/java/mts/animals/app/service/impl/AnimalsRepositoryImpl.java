@@ -18,7 +18,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
 
     private static final Logger log = LoggerFactory.getLogger(AnimalsRepositoryImpl.class);
 
-    private final List<Animal> animals = new ArrayList<>(100);
+    private final int sizeOfAnimalsList = 1000;
+
+    private final List<Animal> animals = new ArrayList<>(sizeOfAnimalsList);
 
     private final CreateAnimalServiceProvider createAnimalServiceProvider;
 
@@ -49,7 +51,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
             }
 
             int randInt;
-            for (int i = 0; i < animals.size(); i++) {
+            for (int i = 0; i < sizeOfAnimalsList; i++) {
                 randInt = ThreadLocalRandom.current().nextInt(0, 3);
                 animals.add(prototypes.get(randInt).createAnimal());
             }
