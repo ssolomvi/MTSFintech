@@ -9,18 +9,22 @@ import mts.animals.configStarter.service.CreateAnimalService.CreateAnimalService
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class AnimalsRepositoryImpl implements AnimalsRepository {
 
     private static final Logger log = LoggerFactory.getLogger(AnimalsRepositoryImpl.class);
 
-    private final int sizeOfAnimalsList = 1000;
+    private static final int SIZE_OF_ANIMALS_LIST = 1000;
 
-    private final List<Animal> animals = new ArrayList<>(sizeOfAnimalsList);
+    private final List<Animal> animals = new ArrayList<>(SIZE_OF_ANIMALS_LIST);
 
     private final CreateAnimalServiceProvider createAnimalServiceProvider;
 
@@ -44,14 +48,14 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
             for (int i = 0; i < countOfAnimalTypes; i++) {
                 CreateAnimalService prototype = createAnimalServiceProvider.createCreateAnimalService();
                 if (Objects.isNull(prototype)) {
-                    throw new RuntimeException(String.format("Caramba! All hands on deck! 'prototype' at index {%d} is null", i));
+                    throw new NullPointerException(String.format("Caramba! All hands on deck! 'prototype' at index {%d} is null", i));
                 }
 
                 prototypes.add(prototype);
             }
 
             int randInt;
-            for (int i = 0; i < sizeOfAnimalsList; i++) {
+            for (int i = 0; i < SIZE_OF_ANIMALS_LIST; i++) {
                 randInt = ThreadLocalRandom.current().nextInt(0, 3);
                 animals.add(prototypes.get(randInt).createAnimal());
             }
@@ -64,22 +68,17 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     /**
      * Finds animals which were born is leap year and returns an array of their names
      *
-     * @return Map, where key is animal's type +  animals' name and value is its birthday
+     * @return Map, where key is animal's breed +  animals' name and value is its birthday
      */
     @Override
     public Map<String, LocalDate> findLeapYearNames() {
-        Map<String, LocalDate> namesAndBirthdays = new HashMap<>();
-        for (Animal animal : animals) {
-            if (Objects.nonNull(animal)) {
-                LocalDate birthdate = animal.getBirthDate();
-                if (Objects.nonNull(birthdate) && birthdate.isLeapYear()) {
-                    namesAndBirthdays.put(animal.getBreed() + " " + animal.getName(),
-                            animal.getBirthDate());
-                }
-            }
-        }
-
-        return namesAndBirthdays;
+        return animals.stream()
+                .filter(Objects::nonNull)
+                .filter(animal -> {
+                    LocalDate birthday = animal.getBirthDate();
+                    return Objects.nonNull(birthday) && birthday.isLeapYear();
+                })
+                .collect(Collectors.toMap(animal -> animal.getBreed() + " " + animal.getName(), Animal::getBirthDate));
     }
 
 
@@ -92,43 +91,45 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      */
     @Override
     public Map<Animal, Integer> findOlderAnimal(int n) {
-        // todo: if not use animals array in future commits, check if the input array is empty
         if (n <= 0) {
             throw new IllegalArgumentException("param n cannot be less or equal to 0");
         }
-
-        Map<Animal, Integer> animalsOlderThanN = new HashMap<>();
-        Animal theOldestAnimal = null;
-        int theOldestAnimalAge = 0;
         var now = LocalDate.now();
 
-        for (Animal animal : animals) {
-            if (Objects.nonNull(animal)) {
-                var birthDate = animal.getBirthDate();
-                if (Objects.nonNull(birthDate)) {
-                    Period betweenNowAndBirthdate = Period.between(birthDate, now);
-                    int yearsBetweenNowAndAnimalsBirthdate = betweenNowAndBirthdate.getYears();
+        Map<Animal, Integer> animalsOlderN = animals.stream()
+                .filter(Objects::nonNull)
+                .map(animal -> {
+                    LocalDate birthday = animal.getBirthDate();
+                    if (Objects.nonNull(birthday)) {
+                        Period betweenNowAndBirthdate = Period.between(birthday, now);
+                        int timeGap = betweenNowAndBirthdate.getYears();
 
-                    if (yearsBetweenNowAndAnimalsBirthdate > n) {
-                        animalsOlderThanN.put(animal, yearsBetweenNowAndAnimalsBirthdate);
-
-                    } else if (yearsBetweenNowAndAnimalsBirthdate == n
-                            && (betweenNowAndBirthdate.getDays() != 0 || betweenNowAndBirthdate.getMonths() != 0)) {
-                        animalsOlderThanN.put(animal, yearsBetweenNowAndAnimalsBirthdate);
-
-                    } else if (yearsBetweenNowAndAnimalsBirthdate > theOldestAnimalAge) {
-                        theOldestAnimal = animal;
-                        theOldestAnimalAge = yearsBetweenNowAndAnimalsBirthdate;
+                        if (timeGap > n ||
+                                (timeGap == n && (betweenNowAndBirthdate.getMonths() > 0 || betweenNowAndBirthdate.getDays() > 0))) {
+                            return new AbstractMap.SimpleEntry<>(animal, timeGap);
+                        }
                     }
-                }
-            }
-        }
+                    return null;
+                })
+                .filter(Objects::nonNull)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        if (animalsOlderThanN.isEmpty()) {
-            animalsOlderThanN.put(theOldestAnimal, theOldestAnimalAge);
+        if (!animalsOlderN.isEmpty()) {
+            return animalsOlderN;
         }
-
-        return animalsOlderThanN;
+        return animals.stream()
+                .filter(Objects::nonNull)
+                .map(animal -> {
+                    LocalDate birthday = animal.getBirthDate();
+                    if (Objects.nonNull(birthday)) {
+                        int timeGap = Period.between(birthday, now).getYears();
+                        return new AbstractMap.SimpleEntry<>(animal, timeGap);
+                    }
+                    return null;
+                })
+                .filter(Objects::nonNull)
+                .max(Comparator.comparingInt(Map.Entry::getValue))
+                .stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     /**
@@ -137,34 +138,116 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * @return Found duplicates and times the certain duplicate was met
      */
     @Override
-    public Map<String, Integer> findDuplicate() {
-        Map<String, Integer> duplicates = new HashMap<>();
-        // not for "uniqueness", but for search speed
-        Set<Animal> animalsUnique = new HashSet<>();
-        for (Animal animal : animals) {
-            if (Objects.nonNull(animal)) {
-                if (animalsUnique.contains(animal)) {
-                    if (duplicates.containsKey(animal.getBreed())) {
-                        duplicates.put(animal.getBreed(), duplicates.get(animal.getBreed()) + 1);
-                    } else {
-                        duplicates.put(animal.getBreed(), 1);
+    public Map<String, List<Animal>> findDuplicate() {
+        return animals.stream()
+                .filter(Objects::nonNull)
+                .filter(animal -> Collections.frequency(animals, animal) > 1)
+                .collect(Collectors.groupingBy(Animal::getBreed));
+    }
+
+    /**
+     * Find average age of {@code animals}
+     *
+     * @param input input list of animals
+     * @return Average age of animals in list {@code animals}
+     */
+    @Override
+    public float findAverageAge(List<Animal> input) {
+        AtomicInteger animalsWithNonNullBirthDates = new AtomicInteger();
+        LocalDate now = LocalDate.now();
+        return (float) input.stream()
+                .filter(Objects::nonNull)
+                .mapToInt(animal -> {
+                    LocalDate birthday = animal.getBirthDate();
+                    if (Objects.nonNull(birthday)) {
+                        animalsWithNonNullBirthDates.getAndIncrement();
+                        return Period.between(birthday, now).getYears();
                     }
-                } else {
-                    animalsUnique.add(animal);
-                }
-            }
+                    return 0;
+                })
+                .sum() / animalsWithNonNullBirthDates.get();
+        // another way: .summaryStatistics(); .getAverage();
+    }
+
+    private BigDecimal findAverageCost(List<Animal> input) {
+        AtomicInteger animalsWithNonNullCost = new AtomicInteger();
+
+        return input.stream()
+                .filter(Objects::nonNull)
+                .map(animal -> {
+                    BigDecimal cost = animal.getCost();
+                    if (Objects.nonNull(cost)) {
+                        animalsWithNonNullCost.getAndIncrement();
+                        return cost;
+                    }
+                    return null;
+                })
+                .filter(Objects::nonNull)
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .divide(BigDecimal.valueOf(animalsWithNonNullCost.get()), RoundingMode.HALF_EVEN);
+    }
+
+    /**
+     * Finds animals in {@code animals} which age is > 5 years and cost is more than average
+     *
+     * @param input input list of animals
+     * @return Animals older than 5 years and more expensive than average
+     */
+    @Override
+    public List<Animal> findOldAndExpensive(List<Animal> input) {
+        BigDecimal averageCost = findAverageCost(input);
+        LocalDate now = LocalDate.now();
+
+        return input.stream()
+                .filter(Objects::nonNull)
+                .filter(animal -> {
+                    /* should I use variables or should I use methods invocations? pluses, minuses? */
+                    LocalDate birthday = animal.getBirthDate();
+                    BigDecimal cost = animal.getCost();
+                    if (Objects.nonNull(birthday) && Objects.nonNull(cost)) {
+                        Period timeGap = Period.between(birthday, now);
+                        int age = timeGap.getYears();
+                        return (age > 5
+                                || (age == 5 && (timeGap.getDays() > 0 || timeGap.getMonths() > 0)))
+                                && animal.getCost().compareTo(averageCost) > 0;
+                    }
+                    return false;
+                })
+                .sorted(Comparator.comparing(Animal::getBirthDate))
+                .toList();
+    }
+
+    /**
+     * Finds 3 animals with the lowest price and returns their names
+     * @param input input list of animals
+     * @return Names of animals with the lowest price sorted in reverse alphabetical order.
+     * */
+    @Override
+    public List<String> findMinCostAnimals(List<Animal> input) {
+        List<Animal> toReturn = input.stream()
+                .filter(Objects::nonNull)
+                .filter(animal -> animal.getCost() != null)
+                .sorted(Comparator.comparing(Animal::getCost))
+                .toList();
+        if (toReturn.size() < 3) {
+            // what should I do here?..
+            return Collections.emptyList();
         }
 
-        return duplicates;
+        return toReturn.stream()
+                .limit(3)
+                .map(Animal::getName)
+                .sorted((s1, s2) -> String.CASE_INSENSITIVE_ORDER.compare(s2, s1))
+                .toList();
     }
 
     @Override
     public void printDuplicate() {
-        Map<String, Integer> duplicates = findDuplicate();
+        Map<String, List<Animal>> duplicates = findDuplicate();
         var sb = new StringBuilder();
 
         if (Objects.nonNull(duplicates) && !duplicates.isEmpty()) {
-            for (Map.Entry<String, Integer> entry : duplicates.entrySet()) {
+            for (Map.Entry<String, List<Animal>> entry : duplicates.entrySet()) {
                 sb.append(entry.getKey())
                         .append("=")
                         .append(entry.getValue())
