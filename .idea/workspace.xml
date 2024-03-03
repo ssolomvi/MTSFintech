@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="afae11d2-b57d-4311-8ce4-8793d9640376" name="Changes" comment="HW-6 fixed creating CreateAnimalServiceImpl prototypes (now without kostil)">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/classes/java/main/mts/animals/configStarter/config/Configurations.class" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/classes/java/main/mts/animals/configStarter/config/Configurations.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/classes/java/test/mts/animals/configStarter/StarterTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/classes/java/test/mts/animals/configStarter/StarterTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/libs/animal-configuration-starter-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/libs/animal-configuration-starter-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/reports/tests/test/classes/mts.animals.configStarter.StarterTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/reports/tests/test/classes/mts.animals.configStarter.StarterTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/reports/tests/test/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/reports/tests/test/packages/mts.animals.configStarter.html" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/reports/tests/test/packages/mts.animals.configStarter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/test-results/test/TEST-mts.animals.configStarter.StarterTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/test-results/test/TEST-mts.animals.configStarter.StarterTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/test-results/test/binary/output.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/test-results/test/binary/output.bin.idx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/tmp/compileTestJava/compileTransaction/stash-dir/StarterTest.class.uniqueId0" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/tmp/compileTestJava/compileTransaction/stash-dir/StarterTest.class.uniqueId0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/src/main/java/mts/animals/configStarter/config/Configurations.java" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/src/main/java/mts/animals/configStarter/config/Configurations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animal-configuration-starter/src/test/java/mts/animals/configStarter/StarterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/src/test/java/mts/animals/configStarter/StarterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/src/main/java/mts/animals/app/bpp/CustomBeanPostProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/animal-configuration-starter/src/main/java/mts/animals/configStarter/bpp/CustomBeanPostProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/src/main/java/mts/animals/app/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/main/java/mts/animals/app/config/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/src/test/java/mts/animals/app/AnimalStudyAppSpringBootTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/application/src/test/java/mts/animals/app/AnimalStudyAppSpringBootTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/application">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <task path="$PROJECT_DIR$/application">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/HW-7" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ssolomvi&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="58b19d34-02a7-4b0a-b9df-43298ab70ceb" />
+        <option name="url" value="https://github.com/ssolomvi/MTSFintech.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2ZVFtXKC8hjXUMvA1y7ecoZnN7K" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;liberica-11&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/developmentInJava/MTSFintech/src/main/java/org/example/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\developmentInJava\MTSFintech\animal-configuration-starter\src\test\resources" />
+      <recent name="C:\developmentInJava\MTSFintech\application\src\test\resources" />
+      <recent name="C:\developmentInJava\MTSFintech\application\src\main\resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="mts.animals.app" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.StarterTest.createAnimalServiceCreateRandomAnimalsOverride">
+    <configuration name="AnimalStudyAppSpringBootTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":application:test" />
+            <option value="--tests" />
+            <option value="&quot;mts.animals.app.AnimalStudyAppSpringBootTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="AnimalStudyAppSpringBootTest.animalsRepositoryIsNotEmpty" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":application:test" />
+            <option value="--tests" />
+            <option value="&quot;mts.animals.app.AnimalStudyAppSpringBootTest.animalsRepositoryIsNotEmpty&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="StarterTest.createAnimalServiceCreateRandomAnimals" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":animal-configuration-starter:test" />
+            <option value="--tests" />
+            <option value="&quot;mts.animals.configStarter.StarterTest.createAnimalServiceCreateRandomAnimals&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="StarterTest.createAnimalServiceCreateRandomAnimalsOverload" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":animal-configuration-starter:test" />
+            <option value="--tests" />
+            <option value="&quot;mts.animals.configStarter.StarterTest.createAnimalServiceCreateRandomAnimalsOverload&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="StarterTest.createAnimalServiceCreateRandomAnimalsOverride" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":animal-configuration-starter:test" />
+            <option value="--tests" />
+            <option value="&quot;mts.animals.configStarter.StarterTest.createAnimalServiceCreateRandomAnimalsOverride&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.StarterTest.createAnimalServiceCreateRandomAnimalsOverride" />
+        <item itemvalue="Gradle.StarterTest.createAnimalServiceCreateRandomAnimals" />
+        <item itemvalue="Gradle.AnimalStudyAppSpringBootTest.animalsRepositoryIsNotEmpty" />
+        <item itemvalue="Gradle.StarterTest.createAnimalServiceCreateRandomAnimalsOverload" />
+        <item itemvalue="Gradle.AnimalStudyAppSpringBootTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="afae11d2-b57d-4311-8ce4-8793d9640376" name="Changes" comment="" />
+      <created>1702499558275</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1702499558275</updated>
+      <workItem from="1708157682086" duration="890000" />
+      <workItem from="1708160629984" duration="1316000" />
+    </task>
+    <task id="LOCAL-00001" summary="initial repository commit">
+      <option name="closed" value="true" />
+      <created>1702500025879</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1702500025879</updated>
+    </task>
+    <task id="LOCAL-00002" summary="HW-1 commit">
+      <option name="closed" value="true" />
+      <created>1702500490696</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1702500490696</updated>
+    </task>
+    <task id="LOCAL-00003" summary="HW-6 fixed creating CreateAnimalServiceImpl prototypes">
+      <option name="closed" value="true" />
+      <created>1707246782996</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1707246782996</updated>
+    </task>
+    <task id="LOCAL-00004" summary="HW-6 fixed creating CreateAnimalServiceImpl prototypes (now without kostil)">
+      <option name="closed" value="true" />
+      <created>1707323234561</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1707323234561</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial repository commit" />
+    <MESSAGE value="HW-1 commit" />
+    <MESSAGE value="HW-6 fixed creating CreateAnimalServiceImpl prototypes" />
+    <MESSAGE value="HW-6 fixed creating CreateAnimalServiceImpl prototypes (now without kostil)" />
+    <option name="LAST_COMMIT_MESSAGE" value="HW-6 fixed creating CreateAnimalServiceImpl prototypes (now without kostil)" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/animal-configuration-starter/src/test/java/mts/animals/configStarter/StarterTest.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/animal-configuration-starter/src/test/java/mts/animals/configStarter/StarterTest.java</url>
+          <line>105</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/animal-configuration-starter/src/main/java/mts/animals/configStarter/provider/CreateAnimalServiceCachedProvider.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/application/src/test/java/mts/animals/app/AnimalStudyAppSpringBootTest.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

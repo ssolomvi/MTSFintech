@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1322510022/MTSFintech.iml" filepath="$PROJECT_DIR$/.idea/modules/-1322510022/MTSFintech.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1063589468/MTSFintech.animal-configuration-starter.iml" filepath="$PROJECT_DIR$/.idea/modules/1063589468/MTSFintech.animal-configuration-starter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1063589468/MTSFintech.animal-configuration-starter.main.iml" filepath="$PROJECT_DIR$/.idea/modules/1063589468/MTSFintech.animal-configuration-starter.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1063589468/MTSFintech.animal-configuration-starter.test.iml" filepath="$PROJECT_DIR$/.idea/modules/1063589468/MTSFintech.animal-configuration-starter.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MTSFintech.application.iml" filepath="$PROJECT_DIR$/.idea/modules/MTSFintech.application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MTSFintech.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/MTSFintech.application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MTSFintech.application.test.iml" filepath="$PROJECT_DIR$/.idea/modules/MTSFintech.application.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.iml" filepath="$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.main.iml" filepath="$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.test.iml" filepath="$PROJECT_DIR$/.idea/modules/application/org.example.MTSFintech.application.test.iml" />
+    </modules>
+  </component>
+</project>
