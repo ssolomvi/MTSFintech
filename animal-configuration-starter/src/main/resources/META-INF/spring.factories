@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    mts.animals.configStarter.config.Configurations
+    mts.animals.config_starter.config.Configurations

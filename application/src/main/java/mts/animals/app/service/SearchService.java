@@ -1,6 +1,6 @@
 package mts.animals.app.service;
 
-import mts.animals.configStarter.abstraction.Animal;
+import mts.animals.config_starter.abstraction.Animal;
 
 public interface SearchService {
 

@@ -1,8 +1,12 @@
 package mts.animals.app.scheduling;
 
 import mts.animals.app.config.AppConfigProperties;
+import mts.animals.app.exceptions.AppIllegalArgumentException;
+import mts.animals.app.exceptions.AppNullPointerException;
 import mts.animals.app.service.AnimalsRepository;
-import mts.animals.configStarter.abstraction.Animal;
+import mts.animals.config_starter.abstraction.Animal;
+import mts.animals.config_starter.exceptions.AnimalConfigurationStarterIllegalArgument;
+import mts.animals.config_starter.exceptions.AnimalConfigurationStarterNullPointerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,9 +67,15 @@ public class AnimalsReportScheduler implements AnimalsReportSchedulerMBean {
     @Override
     public String executeTask() {
         var joiner = new StringJoiner("\n");
-        joiner.add("Animals born in leap years: " + getToStringAnimalsBornInLeapYears());
-        joiner.add(String.format("Animals older than %d: %s", animalCount, getToStringOlderAnimals()));
-        joiner.add("Duplicates: " + animalsRepository.findDuplicate());
+        try {
+            joiner.add("Animals born in leap years: " + getToStringAnimalsBornInLeapYears());
+            joiner.add(String.format("Animals older than %d: %s", animalCount, getToStringOlderAnimals()));
+            joiner.add("Duplicates: " + animalsRepository.findDuplicate());
+        } catch (AppIllegalArgumentException | AppNullPointerException
+                | AnimalConfigurationStarterIllegalArgument | AnimalConfigurationStarterNullPointerException e) {
+            System.out.println(e.getMessage());
+        }
+
 
         log.info(joiner.toString());
 

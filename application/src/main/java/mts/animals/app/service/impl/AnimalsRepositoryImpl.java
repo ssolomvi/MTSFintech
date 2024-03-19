@@ -1,11 +1,14 @@
 package mts.animals.app.service.impl;
 
 import mts.animals.app.config.AppConfigProperties;
+import mts.animals.app.exceptions.AppArrayIncorrectLength;
+import mts.animals.app.exceptions.AppIllegalArgumentException;
+import mts.animals.app.exceptions.AppNullPointerException;
 import mts.animals.app.service.AnimalsRepository;
-import mts.animals.configStarter.abstraction.Animal;
-import mts.animals.configStarter.enums.AnimalType;
-import mts.animals.configStarter.provider.CreateAnimalServiceProvider;
-import mts.animals.configStarter.service.CreateAnimalService.CreateAnimalService;
+import mts.animals.config_starter.abstraction.Animal;
+import mts.animals.config_starter.enums.AnimalType;
+import mts.animals.config_starter.provider.CreateAnimalServiceProvider;
+import mts.animals.config_starter.service.CreateAnimalService.CreateAnimalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +51,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
             for (int i = 0; i < countOfAnimalTypes; i++) {
                 CreateAnimalService prototype = createAnimalServiceProvider.createCreateAnimalService();
                 if (Objects.isNull(prototype)) {
-                    throw new NullPointerException(String.format("Caramba! All hands on deck! 'prototype' at index {%d} is null", i));
+                    throw new AppNullPointerException(String.format("Caramba! All hands on deck! 'prototype' at index {%d} is null", i));
                 }
 
                 prototypes.add(prototype);
@@ -92,7 +95,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     @Override
     public Map<Animal, Integer> findOlderAnimal(int n) {
         if (n <= 0) {
-            throw new IllegalArgumentException("param n cannot be less or equal to 0");
+            throw new AppIllegalArgumentException("AnimalRepositoryImpl::findOlderAnimal: param n cannot be less or equal to 0");
         }
         var now = LocalDate.now();
 
@@ -153,6 +156,10 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      */
     @Override
     public float findAverageAge(List<Animal> input) {
+        if (input == null) {
+            throw new AppIllegalArgumentException("AnimalsRepositoryImpl::findAverageAge: param input should not be null");
+        }
+
         AtomicInteger animalsWithNonNullBirthDates = new AtomicInteger();
         LocalDate now = LocalDate.now();
         return (float) input.stream()
@@ -170,6 +177,10 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     }
 
     private BigDecimal findAverageCost(List<Animal> input) {
+        if (input == null) {
+            throw new AppIllegalArgumentException("AnimalsRepositoryImpl::findAverageCost: param input should not be null");
+        }
+
         AtomicInteger animalsWithNonNullCost = new AtomicInteger();
 
         return input.stream()
@@ -195,6 +206,10 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      */
     @Override
     public List<Animal> findOldAndExpensive(List<Animal> input) {
+        if (input == null) {
+            throw new AppIllegalArgumentException("AnimalsRepositoryImpl::findOldAndExpensive: param input should not be null");
+        }
+
         BigDecimal averageCost = findAverageCost(input);
         LocalDate now = LocalDate.now();
 
@@ -219,11 +234,20 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
 
     /**
      * Finds 3 animals with the lowest price and returns their names
+     *
      * @param input input list of animals
      * @return Names of animals with the lowest price sorted in reverse alphabetical order.
-     * */
+     */
     @Override
-    public List<String> findMinCostAnimals(List<Animal> input) {
+    public List<String> findMinCostAnimals(List<Animal> input) throws AppArrayIncorrectLength {
+        if (input == null) {
+            throw new AppIllegalArgumentException("AnimalsRepositoryImpl::findMinCostAnimals: param input should not be null");
+        }
+
+        if (input.size() < 3) {
+            throw new AppArrayIncorrectLength("AnimalsRepositoryImpl::findMinCostAnimals: param input has length < 3");
+        }
+
         List<Animal> toReturn = input.stream()
                 .filter(Objects::nonNull)
                 .filter(animal -> animal.getCost() != null)

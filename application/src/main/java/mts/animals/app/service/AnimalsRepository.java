@@ -1,6 +1,7 @@
 package mts.animals.app.service;
 
-import mts.animals.configStarter.abstraction.Animal;
+import mts.animals.app.exceptions.AppArrayIncorrectLength;
+import mts.animals.config_starter.abstraction.Animal;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,7 +21,7 @@ public interface AnimalsRepository {
 
     List<Animal> findOldAndExpensive(List<Animal> animals);
 
-    List<String> findMinCostAnimals(List<Animal> animals);
+    List<String> findMinCostAnimals(List<Animal> animals) throws AppArrayIncorrectLength;
 
     void printDuplicate();
 

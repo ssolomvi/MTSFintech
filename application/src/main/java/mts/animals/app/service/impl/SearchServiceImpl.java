@@ -1,7 +1,8 @@
 package mts.animals.app.service.impl;
 
+import mts.animals.app.exceptions.AppIllegalArgumentException;
 import mts.animals.app.service.SearchService;
-import mts.animals.configStarter.abstraction.Animal;
+import mts.animals.config_starter.abstraction.Animal;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -21,7 +22,7 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public String[] findLeapYearNames(Animal[] animals) {
         if (animals == null) {
-            throw new IllegalArgumentException("Argument Animal[] animals must not be null!");
+            throw new AppIllegalArgumentException("SearchServiceImpl::findLeapYearNames: Argument Animal[] animals must not be null!");
         }
 
         List<String> names = new ArrayList<>();
@@ -46,7 +47,7 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public Animal[] findOlderAnimal(Animal[] animals, int n) {
         if (animals == null) {
-            throw new IllegalArgumentException("Argument Animal[] animals must not be null!");
+            throw new AppIllegalArgumentException("SearchServiceImpl::findOlderAnimal: Argument Animal[] animals must not be null!");
         }
 
         List<Animal> animalsOlderN = new ArrayList<>();
@@ -67,6 +68,10 @@ public class SearchServiceImpl implements SearchService {
     }
 
     private void printDuplicate(List<Animal> duplicates) {
+        if (duplicates == null) {
+            throw new AppIllegalArgumentException("SearchServiceImpl::printDuplicate: Argument Animal[] animals must not be null!");
+        }
+
         for (Animal duplicate : duplicates) {
             System.out.println(duplicate);
         }
@@ -81,7 +86,7 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public Animal[] findDuplicate(Animal[] animals) {
         if (animals == null) {
-            throw new IllegalArgumentException("Argument Animal[] animals must not be null!");
+            throw new AppIllegalArgumentException("SearchServiceImpl::findDuplicate: Argument Animal[] animals must not be null!");
         }
 
         List<Animal> duplicates = new ArrayList<>();

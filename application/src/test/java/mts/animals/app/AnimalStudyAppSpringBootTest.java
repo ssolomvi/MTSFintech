@@ -1,14 +1,15 @@
 package mts.animals.app;
 
-import mts.animals.configStarter.animals.Cat;
-import mts.animals.configStarter.animals.Dog;
-import mts.animals.configStarter.animals.Tiger;
-import mts.animals.configStarter.bpp.CustomBeanPostProcessor;
+import mts.animals.app.exceptions.AppArrayIncorrectLength;
+import mts.animals.config_starter.animals.Cat;
+import mts.animals.config_starter.animals.Dog;
+import mts.animals.config_starter.animals.Tiger;
+import mts.animals.config_starter.bpp.CustomBeanPostProcessor;
 import mts.animals.app.service.AnimalsRepository;
-import mts.animals.configStarter.abstraction.Animal;
-import mts.animals.configStarter.enums.AnimalType;
-import mts.animals.configStarter.service.CreateAnimalService.CreateAnimalService;
-import mts.animals.configStarter.provider.AnimalTypeCounter;
+import mts.animals.config_starter.abstraction.Animal;
+import mts.animals.config_starter.enums.AnimalType;
+import mts.animals.config_starter.service.CreateAnimalService.CreateAnimalService;
+import mts.animals.config_starter.provider.AnimalTypeCounter;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -213,8 +214,14 @@ class AnimalStudyAppSpringBootTest {
         when(testAnimals.get(2).getCost()).thenReturn(null);
 
         List<String> expected = Lists.emptyList();
-        List<String> actual = animalsRepository.findMinCostAnimals(testAnimals);
+        List<String> actual = null;
+        try {
+            actual = animalsRepository.findMinCostAnimals(testAnimals);
+        } catch (AppArrayIncorrectLength e) {
+            System.out.println(e.getMessage());
+        }
 
+        assert actual != null;
         assertArrayEquals(expected.toArray(), actual.toArray());
     }
 
@@ -233,8 +240,14 @@ class AnimalStudyAppSpringBootTest {
         when(testAnimals.get(3).getName()).thenReturn("Esmerelda");
 
         List<String> expected = List.of("Tobold", "Esmerelda", "Bellarose");
-        List<String> actual = animalsRepository.findMinCostAnimals(testAnimals);
+        List<String> actual = null;
+        try {
+            actual = animalsRepository.findMinCostAnimals(testAnimals);
+        } catch (AppArrayIncorrectLength e) {
+            System.out.println(e.getMessage());
+        }
 
+        assert actual != null;
         assertArrayEquals(expected.toArray(), actual.toArray());
     }
 

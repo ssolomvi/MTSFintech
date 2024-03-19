@@ -1,10 +1,10 @@
 import mts.animals.app.service.SearchService;
 import mts.animals.app.service.impl.SearchServiceImpl;
-import mts.animals.configStarter.abstraction.Animal;
-import mts.animals.configStarter.animals.Cat;
-import mts.animals.configStarter.animals.Dog;
-import mts.animals.configStarter.animals.Shark;
-import mts.animals.configStarter.animals.Tiger;
+import mts.animals.config_starter.abstraction.Animal;
+import mts.animals.config_starter.animals.Cat;
+import mts.animals.config_starter.animals.Dog;
+import mts.animals.config_starter.animals.Shark;
+import mts.animals.config_starter.animals.Tiger;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
