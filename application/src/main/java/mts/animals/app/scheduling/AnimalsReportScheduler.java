@@ -3,6 +3,7 @@ package mts.animals.app.scheduling;
 import mts.animals.app.config.AppConfigProperties;
 import mts.animals.app.exceptions.AppIllegalArgumentException;
 import mts.animals.app.exceptions.AppNullPointerException;
+import mts.animals.app.scheduling.scheduled_tasks.ScheduledTasks;
 import mts.animals.app.service.AnimalsRepository;
 import mts.animals.config_starter.abstraction.Animal;
 import mts.animals.config_starter.exceptions.AnimalConfigurationStarterIllegalArgument;
@@ -26,12 +27,17 @@ public class AnimalsReportScheduler implements AnimalsReportSchedulerMBean {
 
     private final AnimalsRepository animalsRepository;
 
+    private final ScheduledTasks tasks;
+
     private final int animalCount;
 
     @Autowired
     public AnimalsReportScheduler(AnimalsRepository animalsRepository,
-                                  AppConfigProperties appConfigProperties) {
+                                  AppConfigProperties appConfigProperties,
+                                  @Autowired ScheduledTasks tasks) {
         this.animalsRepository = animalsRepository;
+
+        this.tasks = tasks;
 
         this.animalCount = Optional.ofNullable(appConfigProperties)
                 .map(AppConfigProperties::getAnimalCount)
@@ -67,6 +73,7 @@ public class AnimalsReportScheduler implements AnimalsReportSchedulerMBean {
     @Scheduled(fixedRate = 60_000)
     @Override
     public String executeTask() {
+        /*
         var joiner = new StringJoiner("\n");
         try {
             joiner.add("Animals born in leap years: " + getToStringAnimalsBornInLeapYears());
@@ -79,7 +86,7 @@ public class AnimalsReportScheduler implements AnimalsReportSchedulerMBean {
         }
 
         animalsRepository.printDuplicate();
-
+*/
         return "See log file :D";
     }
 

@@ -21,6 +21,8 @@ public interface AnimalsRepository {
 
     float findAverageAge(List<Animal> animals);
 
+    float findAverageAge();
+
     CopyOnWriteArrayList<Animal> findOldAndExpensive(List<Animal> animals);
 
     CopyOnWriteArrayList<String> findMinCostAnimals(List<Animal> animals) throws AppArrayIncorrectLength;

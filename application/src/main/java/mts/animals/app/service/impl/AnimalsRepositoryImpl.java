@@ -22,6 +22,8 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class AnimalsRepositoryImpl implements AnimalsRepository {
@@ -80,6 +82,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
     public ConcurrentMap<String, LocalDate> findLeapYearNames() {
         // todo: Duplicate key cat Fluff (attempted merging values 2016-05-31 and 2020-07-19)
 //        List<AbstractMap.SimpleEntry<String, LocalDate>> list =
+        Map<String, Integer> duplicates = new HashMap<>();
         Map<String, LocalDate> map =
                 animals.stream()
                         .filter(Objects::nonNull)
@@ -87,13 +90,26 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                             LocalDate birthday = animal.getBirthDate();
                             return Objects.nonNull(birthday) && birthday.isLeapYear();
                         })
+                        .map(animal -> {
+                            String key = animal.getBreed() + " " + animal.getName();
+                            if (duplicates.containsKey(key)) {
+                                int currentValue = duplicates.get(key) + 1;
+                                duplicates.put(key, currentValue);
+                                return new AbstractMap.SimpleEntry<>(key + " " + currentValue, animal.getBirthDate());
+                            }
+                            duplicates.put(key, 1);
+                            return new AbstractMap.SimpleEntry<>(key + " 1", animal.getBirthDate());
+                        })
                         .collect(Collectors.toMap(
-                                animal -> animal.getBreed() + " " + animal.getName(),
-                                Animal::getBirthDate));
+                                AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
 
         return new ConcurrentHashMap<>(map);
     }
 
+    public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+        Set<Object> seen = ConcurrentHashMap.newKeySet();
+        return t -> seen.add(keyExtractor.apply(t));
+    }
 
     /**
      * Finds animals older than argument n. If there are no animals, older than n,
@@ -125,6 +141,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                     return null;
                 })
                 .filter(Objects::nonNull)
+                .filter(distinctByKey(AbstractMap.SimpleEntry::getKey))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         if (!animalsOlderNMap.isEmpty()) {
@@ -162,6 +179,25 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                         .collect(Collectors.groupingBy(Animal::getBreed));
         return new ConcurrentHashMap<>(map);
     }
+
+    // todo: add javaDoc
+    @Override
+    public float findAverageAge() {
+        AtomicInteger animalsWithNonNullBirthDates = new AtomicInteger();
+        LocalDate now = LocalDate.now();
+        return (float) animals.stream()
+                .filter(Objects::nonNull)
+                .mapToInt(animal -> {
+                    LocalDate birthday = animal.getBirthDate();
+                    if (Objects.nonNull(birthday)) {
+                        animalsWithNonNullBirthDates.getAndIncrement();
+                        return Period.between(birthday, now).getYears();
+                    }
+                    return 0;
+                })
+                .sum() / animalsWithNonNullBirthDates.get();
+    }
+
 
     /**
      * Find average age of {@code animals}
@@ -278,11 +314,11 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         }
 
         List<String> list =
-        toReturn.stream()
-                .limit(3)
-                .map(Animal::getName)
-                .sorted((s1, s2) -> String.CASE_INSENSITIVE_ORDER.compare(s2, s1))
-                .toList();
+                toReturn.stream()
+                        .limit(3)
+                        .map(Animal::getName)
+                        .sorted((s1, s2) -> String.CASE_INSENSITIVE_ORDER.compare(s2, s1))
+                        .toList();
         return new CopyOnWriteArrayList<>(list);
     }
 

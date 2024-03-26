@@ -1,5 +1,6 @@
 package mts.animals.app.config;
 
+import mts.animals.app.scheduling.scheduled_tasks.ScheduledTasks;
 import mts.animals.app.service.AnimalsRepository;
 import mts.animals.app.service.impl.AnimalsRepositoryImpl;
 import mts.animals.config_starter.provider.CreateAnimalServiceProvider;
@@ -18,4 +19,8 @@ public class AppConfig {
         return new AnimalsRepositoryImpl(createAnimalServiceProvider, appConfigProperties);
     }
 
+    @Bean(name = ScheduledTasks.NAME, initMethod = "postConstruct")
+    public ScheduledTasks scheduledTasks(@Autowired AnimalsRepository repository) {
+        return new ScheduledTasks(repository);
+    }
 }
