@@ -23,6 +23,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static java.math.RoundingMode.HALF_EVEN;
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,7 +41,7 @@ class AnimalStudyAppSpringBootTest {
     // prove that counter increments after creating CreateAnimalService
 
     private Field getAnimalRepositoryField() {
-        Field field = ReflectionUtils.findField(animalsRepository.getClass(), "animals", List.class);
+        Field field = ReflectionUtils.findField(animalsRepository.getClass(), "animals", CopyOnWriteArrayList.class);
         if (Objects.isNull(field)) {
             throw new RuntimeException("Caramba, reflection not help");
         }
@@ -58,7 +59,7 @@ class AnimalStudyAppSpringBootTest {
         assertNotEquals(0, animalsRepositoryArray.size());
     }
 
-    private void setNewListToAnimalRepositoryList(List<Animal> newArray) {
+    private void setNewListToAnimalRepositoryList(CopyOnWriteArrayList<Animal> newArray) {
         Field animalRepositoryArray = getAnimalRepositoryField();
 
         try {
@@ -71,7 +72,7 @@ class AnimalStudyAppSpringBootTest {
     @Test
     @DisplayName("find leap year names correctness")
     void animalsRepositoryFindLeapYearNamesTest() {
-        List<Animal> testAnimals = Arrays.asList(Mockito.mock(Animal.class), Mockito.mock(Animal.class));
+        CopyOnWriteArrayList<Animal> testAnimals = new CopyOnWriteArrayList<>(Arrays.asList(Mockito.mock(Animal.class), Mockito.mock(Animal.class)));
         when(testAnimals.get(0).getBirthDate()).thenReturn(LocalDate.of(2000, 1, 1));
         when(testAnimals.get(1).getBirthDate()).thenReturn(LocalDate.of(2001, 1, 1));
 
@@ -116,8 +117,8 @@ class AnimalStudyAppSpringBootTest {
     @Test
     @DisplayName("find older animal correctness")
     void checkFindOlderAnimal() {
-        List<Animal> testAnimals = Arrays.asList(Mockito.mock(Animal.class),
-                Mockito.mock(Animal.class), Mockito.mock(Animal.class));
+        CopyOnWriteArrayList<Animal> testAnimals = new CopyOnWriteArrayList<>(Arrays.asList(Mockito.mock(Animal.class),
+                Mockito.mock(Animal.class), Mockito.mock(Animal.class)));
         when(testAnimals.get(0).getBirthDate()).thenReturn(LocalDate.of(2021, 1, 1));
         when(testAnimals.get(1).getBirthDate()).thenReturn(LocalDate.of(2022, 12, 1));
         when(testAnimals.get(2).getBirthDate()).thenReturn(LocalDate.of(2023, 1, 1));
@@ -130,7 +131,7 @@ class AnimalStudyAppSpringBootTest {
         assertEquals(3, (int) actualMap.entrySet().iterator().next().getValue());
     }
 
-    final List<Animal> testDuplicateAnimals = Arrays.asList(
+    final CopyOnWriteArrayList<Animal> testDuplicateAnimals = new CopyOnWriteArrayList<>(Arrays.asList(
             new Tiger("tiger", "Jhon", BigDecimal.valueOf(15561000).setScale(2, HALF_EVEN),
                     "Happy", LocalDate.of(2002, 11, 13)),
             new Dog("dog", "Arnold", BigDecimal.valueOf(2000).setScale(2, HALF_EVEN),
@@ -146,7 +147,7 @@ class AnimalStudyAppSpringBootTest {
             new Cat("cat", "Plusha", BigDecimal.valueOf(1500).setScale(2, HALF_EVEN),
                     "Purring", LocalDate.of(2020, 10, 16)),
             new Dog("dog", "Garold", BigDecimal.valueOf(2000).setScale(2, HALF_EVEN),
-                    "Loyal", LocalDate.of(2024, 1, 31)));
+                    "Loyal", LocalDate.of(2024, 1, 31))));
 
     @Test
     @DisplayName("find duplicates returns correct animals")

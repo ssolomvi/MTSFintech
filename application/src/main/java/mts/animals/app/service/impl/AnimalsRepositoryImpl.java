@@ -78,6 +78,8 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      */
     @Override
     public ConcurrentMap<String, LocalDate> findLeapYearNames() {
+        // todo: Duplicate key cat Fluff (attempted merging values 2016-05-31 and 2020-07-19)
+//        List<AbstractMap.SimpleEntry<String, LocalDate>> list =
         Map<String, LocalDate> map =
                 animals.stream()
                         .filter(Objects::nonNull)
@@ -85,7 +87,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                             LocalDate birthday = animal.getBirthDate();
                             return Objects.nonNull(birthday) && birthday.isLeapYear();
                         })
-                        .collect(Collectors.toMap(animal -> animal.getBreed() + " " + animal.getName(), Animal::getBirthDate));
+                        .collect(Collectors.toMap(
+                                animal -> animal.getBreed() + " " + animal.getName(),
+                                Animal::getBirthDate));
 
         return new ConcurrentHashMap<>(map);
     }

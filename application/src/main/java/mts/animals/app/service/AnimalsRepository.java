@@ -6,22 +6,24 @@ import mts.animals.config_starter.abstraction.Animal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public interface AnimalsRepository {
 
     String NAME = "example_AnimalsRepository";
 
-    Map<String, LocalDate> findLeapYearNames();
+    ConcurrentMap<String, LocalDate> findLeapYearNames();
 
-    Map<Animal, Integer> findOlderAnimal(int n);
+    ConcurrentMap<Animal, Integer> findOlderAnimal(int n);
 
-    Map<String, List<Animal>> findDuplicate();
+    ConcurrentMap<String, List<Animal>> findDuplicate();
 
     float findAverageAge(List<Animal> animals);
 
-    List<Animal> findOldAndExpensive(List<Animal> animals);
+    CopyOnWriteArrayList<Animal> findOldAndExpensive(List<Animal> animals);
 
-    List<String> findMinCostAnimals(List<Animal> animals) throws AppArrayIncorrectLength;
+    CopyOnWriteArrayList<String> findMinCostAnimals(List<Animal> animals) throws AppArrayIncorrectLength;
 
     void printDuplicate();
 
