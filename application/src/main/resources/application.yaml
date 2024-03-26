@@ -1,0 +1,5 @@
+application:
+  sys:
+    logDebugData: true
+  core:
+    animalCount: 10
