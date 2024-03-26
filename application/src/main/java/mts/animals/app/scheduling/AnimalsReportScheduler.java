@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.Optional;
@@ -71,13 +72,11 @@ public class AnimalsReportScheduler implements AnimalsReportSchedulerMBean {
             joiner.add("Animals born in leap years: " + getToStringAnimalsBornInLeapYears());
             joiner.add(String.format("Animals older than %d: %s", animalCount, getToStringOlderAnimals()));
             joiner.add("Duplicates: " + animalsRepository.findDuplicate());
+            log.info(joiner.toString());
         } catch (AppIllegalArgumentException | AppNullPointerException
                 | AnimalConfigurationStarterIllegalArgument | AnimalConfigurationStarterNullPointerException e) {
-            System.out.println(e.getMessage());
+            log.info(e.getMessage());
         }
-
-
-        log.info(joiner.toString());
 
         animalsRepository.printDuplicate();
 
