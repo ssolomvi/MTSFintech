@@ -17,6 +17,9 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -27,7 +30,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
 
     private static final int SIZE_OF_ANIMALS_LIST = 1000;
 
-    private final List<Animal> animals = new ArrayList<>(SIZE_OF_ANIMALS_LIST);
+    private final CopyOnWriteArrayList<Animal> animals = new CopyOnWriteArrayList<>();
 
     private final CreateAnimalServiceProvider createAnimalServiceProvider;
 
@@ -74,14 +77,17 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * @return Map, where key is animal's breed +  animals' name and value is its birthday
      */
     @Override
-    public Map<String, LocalDate> findLeapYearNames() {
-        return animals.stream()
-                .filter(Objects::nonNull)
-                .filter(animal -> {
-                    LocalDate birthday = animal.getBirthDate();
-                    return Objects.nonNull(birthday) && birthday.isLeapYear();
-                })
-                .collect(Collectors.toMap(animal -> animal.getBreed() + " " + animal.getName(), Animal::getBirthDate));
+    public ConcurrentMap<String, LocalDate> findLeapYearNames() {
+        Map<String, LocalDate> map =
+                animals.stream()
+                        .filter(Objects::nonNull)
+                        .filter(animal -> {
+                            LocalDate birthday = animal.getBirthDate();
+                            return Objects.nonNull(birthday) && birthday.isLeapYear();
+                        })
+                        .collect(Collectors.toMap(animal -> animal.getBreed() + " " + animal.getName(), Animal::getBirthDate));
+
+        return new ConcurrentHashMap<>(map);
     }
 
 
@@ -93,13 +99,13 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * @return Map, where key is  of animals which are older than argument n
      */
     @Override
-    public Map<Animal, Integer> findOlderAnimal(int n) {
+    public ConcurrentMap<Animal, Integer> findOlderAnimal(int n) {
         if (n <= 0) {
             throw new AppIllegalArgumentException("AnimalRepositoryImpl::findOlderAnimal: param n cannot be less or equal to 0");
         }
         var now = LocalDate.now();
 
-        Map<Animal, Integer> animalsOlderN = animals.stream()
+        Map<Animal, Integer> animalsOlderNMap = animals.stream()
                 .filter(Objects::nonNull)
                 .map(animal -> {
                     LocalDate birthday = animal.getBirthDate();
@@ -117,22 +123,25 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        if (!animalsOlderN.isEmpty()) {
-            return animalsOlderN;
+        if (!animalsOlderNMap.isEmpty()) {
+            return new ConcurrentHashMap<>(animalsOlderNMap);
         }
-        return animals.stream()
-                .filter(Objects::nonNull)
-                .map(animal -> {
-                    LocalDate birthday = animal.getBirthDate();
-                    if (Objects.nonNull(birthday)) {
-                        int timeGap = Period.between(birthday, now).getYears();
-                        return new AbstractMap.SimpleEntry<>(animal, timeGap);
-                    }
-                    return null;
-                })
-                .filter(Objects::nonNull)
-                .max(Comparator.comparingInt(Map.Entry::getValue))
-                .stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        Map<Animal, Integer> map =
+                animals.stream()
+                        .filter(Objects::nonNull)
+                        .map(animal -> {
+                            LocalDate birthday = animal.getBirthDate();
+                            if (Objects.nonNull(birthday)) {
+                                int timeGap = Period.between(birthday, now).getYears();
+                                return new AbstractMap.SimpleEntry<>(animal, timeGap);
+                            }
+                            return null;
+                        })
+                        .filter(Objects::nonNull)
+                        .max(Comparator.comparingInt(Map.Entry::getValue))
+                        .stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        return new ConcurrentHashMap<>(map);
     }
 
     /**
@@ -141,11 +150,13 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * @return Found duplicates and times the certain duplicate was met
      */
     @Override
-    public Map<String, List<Animal>> findDuplicate() {
-        return animals.stream()
-                .filter(Objects::nonNull)
-                .filter(animal -> Collections.frequency(animals, animal) > 1)
-                .collect(Collectors.groupingBy(Animal::getBreed));
+    public ConcurrentMap<String, List<Animal>> findDuplicate() {
+        Map<String, List<Animal>> map =
+                animals.stream()
+                        .filter(Objects::nonNull)
+                        .filter(animal -> Collections.frequency(animals, animal) > 1)
+                        .collect(Collectors.groupingBy(Animal::getBreed));
+        return new ConcurrentHashMap<>(map);
     }
 
     /**
@@ -204,8 +215,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * @param input input list of animals
      * @return Animals older than 5 years and more expensive than average
      */
+    // todo: must the return type be just List<Animal>?
     @Override
-    public List<Animal> findOldAndExpensive(List<Animal> input) {
+    public CopyOnWriteArrayList<Animal> findOldAndExpensive(List<Animal> input) {
         if (input == null) {
             throw new AppIllegalArgumentException("AnimalsRepositoryImpl::findOldAndExpensive: param input should not be null");
         }
@@ -213,23 +225,25 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
         BigDecimal averageCost = findAverageCost(input);
         LocalDate now = LocalDate.now();
 
-        return input.stream()
-                .filter(Objects::nonNull)
-                .filter(animal -> {
-                    /* should I use variables or should I use methods invocations? pluses, minuses? */
-                    LocalDate birthday = animal.getBirthDate();
-                    BigDecimal cost = animal.getCost();
-                    if (Objects.nonNull(birthday) && Objects.nonNull(cost)) {
-                        Period timeGap = Period.between(birthday, now);
-                        int age = timeGap.getYears();
-                        return (age > 5
-                                || (age == 5 && (timeGap.getDays() > 0 || timeGap.getMonths() > 0)))
-                                && animal.getCost().compareTo(averageCost) > 0;
-                    }
-                    return false;
-                })
-                .sorted(Comparator.comparing(Animal::getBirthDate))
-                .toList();
+        List<Animal> list =
+                input.stream()
+                        .filter(Objects::nonNull)
+                        .filter(animal -> {
+                            /* should I use variables or should I use methods invocations? pluses, minuses? */
+                            LocalDate birthday = animal.getBirthDate();
+                            BigDecimal cost = animal.getCost();
+                            if (Objects.nonNull(birthday) && Objects.nonNull(cost)) {
+                                Period timeGap = Period.between(birthday, now);
+                                int age = timeGap.getYears();
+                                return (age > 5
+                                        || (age == 5 && (timeGap.getDays() > 0 || timeGap.getMonths() > 0)))
+                                        && animal.getCost().compareTo(averageCost) > 0;
+                            }
+                            return false;
+                        })
+                        .sorted(Comparator.comparing(Animal::getBirthDate))
+                        .toList();
+        return new CopyOnWriteArrayList<>(list);
     }
 
     /**
@@ -238,8 +252,9 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
      * @param input input list of animals
      * @return Names of animals with the lowest price sorted in reverse alphabetical order.
      */
+    // todo: must the return type be just List<Animal>?
     @Override
-    public List<String> findMinCostAnimals(List<Animal> input) throws AppArrayIncorrectLength {
+    public CopyOnWriteArrayList<String> findMinCostAnimals(List<Animal> input) throws AppArrayIncorrectLength {
         if (input == null) {
             throw new AppIllegalArgumentException("AnimalsRepositoryImpl::findMinCostAnimals: param input should not be null");
         }
@@ -255,14 +270,16 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .toList();
         if (toReturn.size() < 3) {
             // what should I do here?..
-            return Collections.emptyList();
+            return new CopyOnWriteArrayList<>();
         }
 
-        return toReturn.stream()
+        List<String> list =
+        toReturn.stream()
                 .limit(3)
                 .map(Animal::getName)
                 .sorted((s1, s2) -> String.CASE_INSENSITIVE_ORDER.compare(s2, s1))
                 .toList();
+        return new CopyOnWriteArrayList<>(list);
     }
 
     @Override
